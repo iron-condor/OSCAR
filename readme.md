@@ -34,4 +34,7 @@ xdg-utils
 ### **Getting started**
 
 Starting with OSCAR is easy - just open the program in a terminal and start talking to him.
+<<<<<<< HEAD
 
+=======
+>>>>>>> Updated readme.md
