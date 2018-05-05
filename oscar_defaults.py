@@ -137,7 +137,7 @@ responses_array = [
 	#14: Response to decide which option in the should method should be used.
 	[
 		"Clearly, <option> is the superior choice.",
-        "I would go with <option>."
+        "I would go with <option>.",
         "You know what? Today, I'm feeling like <option>.",
         "You'd have to be a fool to not go with <option>.",
         "In situations like this, you should ask yourself: what would OSCAR do? Obviously, he would go with <option>.",
