@@ -22,6 +22,17 @@ The responses file manages OSCAR's responses to various stimuli.
 
 With these two files, you can customize OSCAR to be able to use and understand any type of vernacular. If you plan on adding new functions to OSCAR, you'll need to update these files accordingly.
 
+### **Features**
+---
+OSCAR is still in its youth, so expect more features in the near future.
+
+At the moment, OSCAR can
+* Tell you the time
+* Look up and summarize things for you
+* Schedule a shutdown
+* Schedule generic commands
+* Help you make decisions (*Should I stay in for the night, or go out and eat?*)
+
 
 ### **Dependencies**
 ---
