@@ -1,4 +1,4 @@
-![OSCAR](https://i.imgur.com/jUDT9qw.png)
+![OSCAR](https://i.imgur.com/zMjKKeP.png)
 
 
 ### **What is OSCAR?**

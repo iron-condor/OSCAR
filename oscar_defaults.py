@@ -2,7 +2,7 @@
 #All are generated using JSON, which was chosen as a convenient half-way point between English readable text and code.
 #   - Responses
 #       - The responses file is responsible for Oscar's responses to various inputs.
-#   - inputs
+#   - Inputs
 #       - The inputs file is in charge of mapping inputs to Oscar's various functions.
 #       - While it is a bit more complicated than the response system, the input system has a format that is easy to follow, and is described above its code below.
 
