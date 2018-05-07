@@ -367,7 +367,8 @@ inputs_array = [
             "forget it",
             "changed my mind",
             "negative",
-            "negatory "
+            "negatory ",
+            "cancel"
         ],
         [
 
