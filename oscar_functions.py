@@ -145,9 +145,8 @@ def search(identifier_string, command):
 #Returns the time in seconds until a scheduled event. Interprets text from the user in standard time units
 def schedule(command):
     time_units = collections.OrderedDict([
-        ("[.,?!';:&() ]sec[ond]?[s]?[.,?!';:&()s ]?", 1),
-        ("[.,?!';:&() ]min[^.,?!';:&() ]?", 60),
-        ("[.,?!';:&() ]minute[.,?!';:&()s ]?", 60),
+        ("[.,?!';:&() ]seco?n?d?s?[.,?!';:&()s ]?", 1),
+        ("[.,?!';:&() ]minu?t?e?s?[.,?!';:&()s ]?", 60),
         ("[.,?!';:&() ]hour[.,?!';:&()s ]?", 3600),
         ("[.,?!';:&() ]day[.,?!';:&()s ]?", 86400)
     ])
@@ -158,8 +157,12 @@ def schedule(command):
             for item in occurences:
                 index = command.find(item)
                 index = command.rfind(' ', 0, index - 1) + 1
-                num = float(command[index:(command.find(' ', index))])
-                total_time += (num * time_units[key])
+                #This bit's here to ignore false positives. For example: "I'll be heading to bed in a minute, so can you shut down my computer in 2 min?"
+                try:
+                    num = float(command[index:(command.find(' ', index))])
+                    total_time += (num * time_units[key])
+                except Exception:
+                    continue
     if total_time != 0:
         time_string = ""
         orig_total_time = total_time
