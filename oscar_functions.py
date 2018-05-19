@@ -99,11 +99,14 @@ def give_time():
 #Opens a given URL in the user's browser. If unsuccessful, prompts the user to open it his/herself.
 def open_in_browser(url):
     if sys.platform=='win32':
+        print(get_response(23))
         os.startfile(url)
     elif sys.platform=='darwin':
+        print(get_response(23))
         subprocess.Popen(['open', url])
     else:
         try:
+            print(get_response(23))
             subprocess.Popen(['xdg-open', url])
         except OSError:
             get_response(7, "<url>", url)

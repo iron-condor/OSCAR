@@ -27,6 +27,9 @@
 #18: Response if the user shouldn't do something
 #19: Response to tell user that Oscar won't open a link in their browser
 #20: Response to tell the user that Oscar won't open a link in their browser (No summary)
+#21: Response to tell the user that their command has been scheduled.
+#22: Reponse to ask the user to enter the command to be scheduled.
+#23: Response to tell user that Oscar is opening a link in their browser
 responses_array = [
     #0: Daytime greetings
     [
@@ -208,6 +211,14 @@ responses_array = [
         "My schedule's clear for that time. What would you like me to do then?",
         "I don't have any plans for that time. What do you need me to do?",
         "Sure, that time works for me. What's your command?"
+    ],
+    #23: Response to tell user that Oscar is opening a link in their browser
+    [
+        "Let's open that in your browser, then.",
+        "Opening link now...",
+        "I'll open that link for you quickly.",
+        "Your browser is asking for your attention - I believe it's the link you asked for.",
+        "The page is opened in your browser, whenever you're ready for it."
     ]
 ]
 
