@@ -10,6 +10,8 @@ import re
 from random import randint
 
 responses = []
+inputs = []
+settings = []
 firstTime = True
 
 #Runs commands as a detached subprocess. In other words, if OSCAR is closed, the commands ran here continue existing.
@@ -22,15 +24,15 @@ def subprocess_cmd(bash_command):
 #If the type is none, it checks if the string means yes
 #If the type is anything besides none, it checks if the string means no
 def get_yes_no(confirm, type = None):
-    inputs_array = oscar_defaults.inputs_array
+    global inputs
     contained_yes = ""
     if type == None:
-        for i in range(0, len(inputs_array[9][0])):
+        for i in range(0, len(inputs[9][0])):
             if contained_yes == "":
-                if re.search(inputs_array[9][0][i],confirm):
-                    contained_yes = inputs_array[9][0][i]
-                if contained_yes != "" and len(inputs_array[9][1]):
-                    for antiword in inputs_array[9][1]:
+                if re.search(inputs[9][0][i],confirm):
+                    contained_yes = inputs[9][0][i]
+                if contained_yes != "" and len(inputs[9][1]):
+                    for antiword in inputs[9][1]:
                         if re.search(antiword, confirm):
                             contained_yes = ""
             if contained_yes != "":
@@ -38,12 +40,12 @@ def get_yes_no(confirm, type = None):
                 break
         return False
     else:
-        for i in range(0, len(inputs_array[8][0])):
+        for i in range(0, len(inputs[8][0])):
             if contained_yes == "":
-                if re.search(inputs_array[8][0][i], confirm):
-                    contained_yes = inputs_array[8][0][i]
-                if contained_yes != "" and len(inputs_array[8][1]):
-                    for antiword in inputs_array[8][1]:
+                if re.search(inputs[8][0][i], confirm):
+                    contained_yes = inputs[8][0][i]
+                if contained_yes != "" and len(inputs[8][1]):
+                    for antiword in inputs[8][1]:
                         if re.search(antiword, confirm):
                             contained_yes = ""
             if contained_yes != "":
@@ -57,7 +59,10 @@ def get_yes_no(confirm, type = None):
 #Replacement is the string with which the delimiter is replaced
 def get_response(index, delimiter = None, replacement = None):
     if delimiter == None or replacement == None:
-        return responses[index][randint(0, len(responses[index]) - 1)]
+        if responses:
+            return responses[index][randint(0, len(responses[index]) - 1)]
+        else:
+            return oscar_defaults.responses_array[index][randint(0, len(oscar_defaults.responses_array[index]) - 1)]
     else:
         original_response = get_response(index)
         response = ""
@@ -265,11 +270,11 @@ def should(command):
 
 #Receives the command and processes the input appropriately
 def receive_command():
-    global responses, firstTime
-    inputs_array = oscar_defaults.inputs_array
+    global responses, inputs, firstTime
 
     if firstTime:
         responses = oscar_defaults.responses_array
+        inputs = oscar_defaults.inputs_array
         greet()
         firstTime = False
 
@@ -277,13 +282,13 @@ def receive_command():
     contained_keyword = ""
     command_index = -1
 
-    for input_type in range(0, len(inputs_array)):
+    for input_type in range(0, len(inputs)):
         if contained_keyword == "":
-            for keyword in inputs_array[input_type][0]:
+            for keyword in inputs[input_type][0]:
                 if re.search(keyword, command):
                     contained_keyword = keyword
-            if contained_keyword != "" and len(inputs_array[input_type][1]):
-                for antiword in inputs_array[input_type][1]:
+            if contained_keyword != "" and len(inputs[input_type][1]):
+                for antiword in inputs[input_type][1]:
                     if re.search(antiword, command):
                         contained_keyword = ""
         if contained_keyword != "":

@@ -30,6 +30,10 @@
 #21: Response to tell the user that their command has been scheduled.
 #22: Reponse to ask the user to enter the command to be scheduled.
 #23: Response to tell user that Oscar is opening a link in their browser
+#24: Response to ask the user for their name
+#25: Response to ask the user if they prefer 24-hour or 12-hour clocks
+#26: Response to tell the user that they've selected a 24-hour clock
+#27: Response to tell the user that they've selected a 12-hour clock
 responses_array = [
     #0: Daytime greetings
     [
@@ -219,6 +223,38 @@ responses_array = [
         "I'll open that link for you quickly.",
         "Your browser is asking for your attention - I believe it's the link you asked for.",
         "The page is opened in your browser, whenever you're ready for it."
+    ],
+    #24: Response to ask the user for their name
+    [
+        "What do you like to be called?\n",
+        "What's your name, stranger?\n",
+        "I'm Oscar, lovely to meet you. You would be..?\n",
+        "A fresh face! What do I call you?\n",
+        "I'm always terrible at introductions. Let's start with names - I'm Oscar, and you are?\n"
+    ],
+    #25: Response to ask the user if they prefer 24-hour or 12-hour clocks
+    [
+        "Next question: Your clock type. 24-hour or 12-hour?\n",
+        "What type of clock do you prefer: 12-hour or 24-hour?\n"
+        "<user>. Got it. So what kind of clock do you like, <user>? 24-hour or 12-hour?\n",
+        "It's nice to meet you, <user>. Do you prefer the 24-hour or 12-hour clock?\n",
+        "Okay <user>, do you prefer your times to be in 24-hour or 12-hour format?\n"
+    ],
+    #26: Response to tell the user that they've selected a 24-hour clock
+    [
+        "24-hour, huh? Finally, someone sensible.",
+        "At last, someone rational. 24-hour clock it is.",
+        "I'll serve your times in a 24-hour format, then.",
+        "24-hour? sounds good to me.",
+        "I'm glad you chose 24-hour. I don't think I'd see you in the same light if you had said 12."
+    ],
+    #27: Response to tell the user that they've selected a 12-hour clock
+    [
+        "12-hour? Weird, but okay.",
+        "12-hour it is.",
+        "Strange choice, but it's yours. 12-hour clock, then.",
+        "Alright, I'll give you the time in the 12-hour format whenever you ask.",
+        "12-hour? Aww. Come to the dark side - we have cookies, and twice the hours on our clock."
     ]
 ]
 
@@ -235,6 +271,13 @@ responses_array = [
 #5: Schedule shutdown command
 #6: Schedule command command
 #7: Close command
+#8: A response that means no
+#9: A response that means yes
+#10: A response that means the user wants to walk through settings configuration.
+#11: A response that means the user wants to use the default settings.
+#12: A response that means the user prefers the 24-hour clock
+#13: A response that means the user prefers the 12-hour clock
+#14: Introductions to the user's name
 inputs_array = [
     #0: Time/date command
     [
@@ -409,5 +452,95 @@ inputs_array = [
             "\\bdo not\\b",
             "\\bnevermind\\b"
         ]
+    ],
+    #10: A response that means the user wants to walk through settings configuration.
+    [
+        [
+            "\\bhelp\\b",
+            "\\bhelpful\\b",
+            "\\byes\\b",
+            "\\bof course\\b",
+            "\\bplease\\b",
+            "\\bnaturally\\b",
+            "\\blove\\b",
+            "\\byeah\\b",
+            "\\byep\\b",
+            "\\byea\\b",
+            "\\bi do\\b",
+            "\\bsure\\b",
+            "\\balright\\b",
+            "\\bokay\\b",
+            "\\bok\\b",
+            "\\bwalkthrough\\b",
+            "\\bwalk me through\\b"
+        ],
+        [
+            "\\bno\\b",
+            "\\bnot\\b",
+            "\\bdon't\\b",
+            "\\bdo not\\b"
+        ]
+    ],
+    #11: A response that means the user wants to use the default settings.
+    [
+        [
+            "\\bdefaults?\\b",
+            "\\bthanks anyways\\b",
+            "\\bno thanks\\b"
+        ],
+        [
+
+        ]
+    ],
+    #12: A response that means the user prefers the 24-hour clock
+    [
+        [
+            "\\b24-hour\\b",
+            "\\b24 hour\\b",
+            "\\b24hour\\b",
+            "\\b24\\b",
+            "\\btwenty four\\b"
+        ],
+        [
+
+        ],
+    ],
+    #13: A response that means the user prefers the 12-hour clock
+    [
+        [
+            "\\b12-hour\\b",
+            "\\b12 hour\\b",
+            "\\b12hour\\b",
+            "\\b12\\b",
+            "\\btwelve\\b"
+        ],
+        [
+
+        ]
+    ],
+    #14: Introductions to the user's name
+    [
+        [
+            "\\byou can call me\\b",
+            "\\bmy name is\\b",
+            "\\bsome people call me\\b",
+            "\\bsome call me\\b",
+            "\\bthe name's\\b",
+            "\\bthe name is\\b",
+            "\\bcall me\\b",
+            "\\bi go by\\b"
+        ],
+        [
+
+        ]
     ]
+]
+#The settings array is responsible for managing the user's various settings and preferences.
+#0: The name that the user wishes to be called
+#1: 24-hour or 12-hour clock
+settings_array = [
+    #0: The name that the user wishes to be called
+    "nameless",
+    #1: 24-hour or 12-hour clock. 0 = 24-hour, 1 = twelve-hour
+    1
 ]
