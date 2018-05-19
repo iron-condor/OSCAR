@@ -228,45 +228,45 @@ inputs_array = [
     #0: Time/date command
     [
         [
-            "time",
-            "day",
-            "date"
+            "\\btime\\b",
+            "\\bday\\b",
+            "\\bdate\\b"
         ],
         [
-            "look up",
-            "search",
-            "looking up",
-            "searching up",
-            "tell me about",
-            "who is",
-            "who's",
-            "define",
-            "what are",
-            "what was",
-            "what were",
-            "who was",
-            "who were",
+            "\\blook up\\b",
+            "\\bsearch\\b",
+            "\\blooking up\\b",
+            "\\bsearching up\\b",
+            "\\btell me about",
+            "\\bwho is\\b",
+            "\\bwho's\\b",
+            "\\bdefine\\b",
+            "\\bwhat are\\b",
+            "\\bwhat was\\b",
+            "\\bwhat were\\b",
+            "\\bwho was\\b",
+            "\\bwho were\\b",
         ]
     ],
     #1: Search command
     [
         [
-            "search",
-            "look up",
-            "looking up",
-            "searching up",
-            "tell me",
-            "tell me the",
-            "tell me about",
-            "what is",
-            "what's",
-            "who is",
-            "define",
-            "what are",
-            "what was",
-            "what were",
-            "who was",
-            "who were"
+            "\\bsearch\\b",
+            "\\blook up\\b",
+            "\\blooking up\\b",
+            "\\bsearching up\\b",
+            "\\btell me\\b",
+            "\\btell me the\\b",
+            "\\btell me about\\b",
+            "\\bwhat is\\b",
+            "\\bwhat's\\b",
+            "\\bwho is\\b",
+            "\\bdefine\\b",
+            "\\bwhat are\\b",
+            "\\bwhat was\\b",
+            "\\bwhat were\\b",
+            "\\bwho was\\b",
+            "\\bwho were\\b"
         ],
         [
 
@@ -275,7 +275,7 @@ inputs_array = [
     #2: Should command
     [
         [
-            "should"
+            "\\bshould\\b"
         ],
         [
 
@@ -284,9 +284,9 @@ inputs_array = [
     #3: Launch program command
     [
         [
-            "launch",
-            "start",
-            "open"
+            "\\blaunch\\b",
+            "\\bstart\\b",
+            "\\bopen\\b"
         ],
         [
 
@@ -295,12 +295,12 @@ inputs_array = [
     #4: Thank you command
     [
         [
-            "thanks",
-            "thank you",
-            "appreciate",
-            "grateful",
-            "glad",
-            "ty"
+            "\\bthanks\\b",
+            "\\bthank you\\b",
+            "\\bappreciate\\b",
+            "\\bgrateful\\b",
+            "\\bglad\\b",
+            "\\bty\\b"
         ],
         [
 
@@ -309,13 +309,13 @@ inputs_array = [
     #5: Schedule shutdown command
     [
         [
-            "shut down",
-            "shutdown",
-            "power off",
-            "poweroff",
-            "power down",
-            "powerdown",
-            "turn off"
+            "\\bshut down\\b",
+            "\\bshutdown\\b",
+            "\\bpower off\\b",
+            "\\bpoweroff\\b",
+            "\\bpower down\\b",
+            "\\bpowerdown\\b",
+            "\\bturn off\\b"
         ],
         [
 
@@ -324,11 +324,11 @@ inputs_array = [
     #6: Schedule command command
     [
         [
-            "schedule",
-            "[.,?!';:&() ]seco?n?d?s?[.,?!';:&() ]?",
-            "[.,?!';:&() ]minu?t?e?s?[.,?!';:&() ]",
-            "[.,?!';:&() ]hour[.,?!';:&()s ]?",
-            "[.,?!';:&() ]day[.,?!';:&()s ]?"
+            "\\bschedule\\b",
+            "\\bseco?n?d?s?\\b",
+            "\\bminu?t?e?s?\\b",
+            "\\bhour\\b",
+            "\\bday\\b"
         ],
         [
 
@@ -337,38 +337,38 @@ inputs_array = [
     #7: Close command
     [
         [
-            "exit",
-            "fuck off",
-            ":q",
-            "quit",
-            "close",
-            "bye",
-            "talk to you later",
-            "later",
-            "see you later",
-            "cya",
-            "see you"
+            "\\bexit\\b",
+            "\\bfuck off\\b",
+            "\\b:q\\b",
+            "\\bquit\\b",
+            "\\bclose\\b",
+            "\\bbye\\b",
+            "\\btalk to you later\\b",
+            "\\blater\\b",
+            "\\bsee you later\\b",
+            "\\bcya\\b",
+            "\\bsee you\\b"
         ],
         [
-            "don't",
-            "do not",
-            "no",
-            "nevermind"
+            "\\bdon't\\b",
+            "\\bdo not\\b",
+            "\\bno\\b",
+            "\\bnevermind\\b"
         ]
     ],
     #8: A response that means no
     [
         [
-            "no",
-            "nah",
-            "nevermind",
-            "nope",
-            "forget about it",
-            "forget it",
-            "changed my mind",
-            "negative",
-            "negatory ",
-            "cancel"
+            "\\bno\\b",
+            "\\bnah\\b",
+            "\\bnevermind\\b",
+            "\\bnope\\b",
+            "\\bforget about it\\b",
+            "\\bforget it\\b",
+            "\\bchanged my mind\\b",
+            "\\bnegative\\b",
+            "\\bnegatory \\b",
+            "\\bcancel\\b"
         ],
         [
 
@@ -377,22 +377,26 @@ inputs_array = [
     #9: A response that means yes
     [
         [
-            "yes",
-            "of course",
-            "please",
-            "naturally",
-            "love",
-            "yeah",
-            "yep",
-            "yea",
-            "i do"
+            "\\byes\\b",
+            "\\bof course\\b",
+            "\\bplease\\b",
+            "\\bnaturally\\b",
+            "\\blove\\b",
+            "\\byeah\\b",
+            "\\byep\\b",
+            "\\byea\\b",
+            "\\bi do\\b",
+            "\\bsure\\b",
+            "\\balright\\b",
+            "\\bokay\\b",
+            "\\bok\\b"
         ],
         [
-            "[.,?!';:&() ]no[^.,?!';:&() ]?",
-            "[.,?!';:&() ]not[^.,?!';:&() ]?",
-            "[.,?!';:&() ]don't[^.,?!';:&() ]?",
-            "[.,?!';:&() ]do not[^.,?!';:&() ]?",
-            "[.,?!';:&() ]nevermind[^.,?!';:&() ]??"
+            "\\bno\\b",
+            "\\bnot\\b",
+            "\\bdon't\\b",
+            "\\bdo not\\b",
+            "\\bnevermind\\b"
         ]
     ]
 ]

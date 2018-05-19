@@ -110,7 +110,7 @@ def open_in_browser(url):
 
 #Searches and interprets a given string. Can extract summaries from some sites and services. Uses duckduckgo
 def search(identifier_string, command):
-    index = command.find(identifier_string) + len(identifier_string) + 1
+    index = re.search(identifier_string, command).end()
     query = command[index:]
     if query != "":
         answer = duckduckgo.get_zci(query)
