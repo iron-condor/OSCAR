@@ -537,7 +537,7 @@ inputs_array = [
 ]
 #The settings array is responsible for managing the user's various settings and preferences.
 #0: The name that the user wishes to be called
-#1: 24-hour or 12-hour clock
+#1: 24-hour or 12-hour clock. 0 = 24-hour, 1 = twelve-hour
 settings_array = [
     #0: The name that the user wishes to be called
     "nameless",

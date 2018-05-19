@@ -98,7 +98,13 @@ def give_time():
     month = datetime.now().month
     hour = datetime.now().hour
     minute = datetime.now().minute
-    time = datetime.now().strftime("%A, %B %d, at %H:%M")
+    time = None
+    #If 12-hour clock
+    if (settings[1]):
+        time = datetime.now().strftime("%A, %B %d, at %I:%M %p")
+    #If 24-hour clock
+    else:
+        time = datetime.now().strftime("%A, %B %d, at %H:%M")
     print(get_response(5, "<time>", time))
 
 #Opens a given URL in the user's browser. If unsuccessful, prompts the user to open it his/herself.
@@ -270,11 +276,12 @@ def should(command):
 
 #Receives the command and processes the input appropriately
 def receive_command():
-    global responses, inputs, firstTime
+    global responses, inputs, settings, firstTime
 
     if firstTime:
         responses = oscar_defaults.responses_array
         inputs = oscar_defaults.inputs_array
+        settings = oscar_defaults.settings_array
         greet()
         firstTime = False
 
