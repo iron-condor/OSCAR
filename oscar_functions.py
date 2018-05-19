@@ -145,10 +145,10 @@ def search(identifier_string, command):
 #Returns the time in seconds until a scheduled event. Interprets text from the user in standard time units
 def schedule(command):
     time_units = collections.OrderedDict([
-        ("[.,?!';:&() ]seco?n?d?s?[.,?!';:&()s ]?", 1),
-        ("[.,?!';:&() ]minu?t?e?s?[.,?!';:&()s ]?", 60),
-        ("[.,?!';:&() ]hour[.,?!';:&()s ]?", 3600),
-        ("[.,?!';:&() ]day[.,?!';:&()s ]?", 86400)
+        ("\\bsecs?\\b|\\bseconds?\\b", 1),
+        ("\\bmins?\\b|\\bminutes?\\b", 60),
+        ("\\bhour\\b", 3600),
+        ("\\bday\\b", 86400)
     ])
     total_time = 0.0
     for key in time_units:
