@@ -109,10 +109,10 @@ def give_time():
 
 #Opens a given URL in the user's browser. If unsuccessful, prompts the user to open it his/herself.
 def open_in_browser(url):
-    if sys.platform=='win32':
+    if sys.platform == 'win32':
         print(get_response(23))
         os.startfile(url)
-    elif sys.platform=='darwin':
+    elif sys.platform == 'darwin':
         print(get_response(23))
         subprocess.Popen(['open', url])
     else:
@@ -245,8 +245,14 @@ def schedule_command(command):
 def schedule_shutdown(command):
     time = schedule(command)
     if time != None:
-        bash_command = "sleep " + str(time) + " && poweroff"
-        subprocess_cmd(bash_command)
+        shell_command = None
+        if sys.platform == "win32":
+            shell_command = "shutdown -s -t " + str(time) + " -c Shutting down. Have a lovely rest of your day."
+        elif sys.platform == "darwin":
+            shell_command = "sleep " + str(time) + "osascript -e 'tell app \"System Events\" to shut down'"
+        else:
+            shell_command = "sleep " + str(time) + " && poweroff"
+        subprocess_cmd(shell_command)
         print(get_response(12))
 
 #Tells the user if someone should or should not perform an action.

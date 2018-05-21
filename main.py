@@ -2,6 +2,7 @@
 # Dependencies: duckduckgo-python3 (find on github), xdg-utils
 import oscar_defaults
 import oscar_functions
+from sys import platform
 from pathlib import Path
 import json
 import os
@@ -42,10 +43,19 @@ def walkthrough():
 #Loads the responses file if it exists. If it doesn't, one is automatically generated for the user.
 def load_responses():
     responses_array = oscar_defaults.responses_array
-    directory = str(Path.home()) + "/.config/oscar"
+    directory = None
+    responses_file = None
+    if sys.platform == "win32":
+        directory = "C:\\Program Files(x86)\\Oscar"
+        responses_file = Path(directory + "\\responses")
+    elif sys.platform == "darwin":
+        directory = str(Path.home()) + "/Library/Preferences/Oscar"
+        responses_file = Path(directory + "/responses")
+    else:
+        directory = str(Path.home()) + "/.config/oscar"
+        responses_file = Path(directory + "/responses")
     if not os.path.exists(directory):
         os.makedirs(directory)
-    responses_file = Path(str(Path.home()) + "/.config/oscar/responses")
     try:
         responses = open(responses_file, 'r')
     except FileNotFoundError:
@@ -59,10 +69,19 @@ def load_responses():
 #Loads the inputs file if it exists. If it doesn't, one is automatically generated for the user.
 def load_inputs():
     inputs_array = oscar_defaults.inputs_array
-    directory = str(Path.home()) + "/.config/oscar"
+    directory = None
+    inputs_file = None
+    if sys.platform == "win32":
+        directory = "C:\\Program Files(x86)\\Oscar"
+        inputs_file = Path(directory + "\\inputs")
+    elif sys.platform == "darwin":
+        directory = str(Path.home()) + "/Library/Preferences/Oscar"
+        inputs_file = Path(directory + "/inputs")
+    else:
+        directory = str(Path.home()) + "/.config/oscar"
+        inputs_file = Path(directory + "/inputs")
     if not os.path.exists(directory):
         os.makedirs(directory)
-    inputs_file = Path(str(Path.home()) + "/.config/oscar/inputs")
     try:
         inputs = open(inputs_file, 'r')
     except FileNotFoundError:
@@ -76,10 +95,18 @@ def load_inputs():
 #Loads the settings file if it exists. If it doesn't, it prompts the user to select his/her settings, or allows the user to let oscar generate the defaults.
 def load_settings():
     settings_array = oscar_defaults.settings_array
-    directory = str(Path.home()) + "/.config/oscar"
+    directory = None
+    if sys.platform == "win32":
+        directory = "C:\\Program Files(x86)\\Oscar"
+        settings_file = Path(directory + "\\settings")
+    elif sys.platform == "darwin":
+        directory = str(Path.home()) + "/Library/Preferences/Oscar"
+        settings_file = Path(directory + "/settings")
+    else:
+        directory = str(Path.home()) + "/.config/oscar"
+        settings_file = Path(directory + "/settings")
     if not os.path.exists(directory):
         os.makedirs(directory)
-    settings_file = Path(str(Path.home()) + "/.config/oscar/settings")
     try:
         settings = open(settings_file, 'r')
     except FileNotFoundError:
