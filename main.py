@@ -2,7 +2,7 @@
 # Dependencies: duckduckgo-python3 (find on github), xdg-utils
 import oscar_defaults
 import oscar_functions
-from sys import platform
+import sys
 from pathlib import Path
 import json
 import os
