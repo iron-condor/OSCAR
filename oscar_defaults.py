@@ -314,7 +314,9 @@ inputs_array = [
             "\\btell me about\\b",
             "\\bwhat is\\b",
             "\\bwhat's\\b",
+            "\\bwhats\\b",
             "\\bwho is\\b",
+            "\\bwho's\\b",
             "\\bdefine\\b",
             "\\bwhat are\\b",
             "\\bwhat was\\b",
@@ -443,6 +445,7 @@ inputs_array = [
             "\\bsure\\b",
             "\\balright\\b",
             "\\bokay\\b",
+            "\\bsummary\\b",
             "\\bok\\b"
         ],
         [
