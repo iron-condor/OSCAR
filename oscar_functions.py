@@ -82,7 +82,7 @@ def get_response(index, delimiter = None, replacement = None):
 #Greets the user. responses[0] for daytime greetings, responses[1] for nighttime greetings.
 def greet():
     global responses
-    user = getpass.getuser()
+    user = oscar_defaults.settings_array[0]
     hour = datetime.now().hour
     greeting = ""
     if hour >= 18 or hour < 7:
@@ -283,7 +283,6 @@ def should(command):
 #Receives the command and processes the input appropriately
 def receive_command():
     global responses, inputs, settings, firstTime
-
     if firstTime:
         responses = oscar_defaults.responses_array
         inputs = oscar_defaults.inputs_array

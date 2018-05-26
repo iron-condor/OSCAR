@@ -103,11 +103,11 @@ responses_array = [
 	],
 	#9: Response to say that the scheduled task has been cancelled.
 	[
-		"Task cancelled.\n",
-		"Okay. I'll mark that with a red X. Very large, very red, just for you.\n",
-		"Operation aborted.\n",
-		"You're really decisive, aren't you? Okay, okay, cancelling it...\n",
-		"I'll forget you even asked.\n"
+		"Task cancelled.",
+		"Okay. I'll mark that with a red X. Very large, very red, just for you.",
+		"Operation aborted.",
+		"You're really decisive, aren't you? Okay, okay, cancelling it...",
+		"I'll forget you even asked."
 	],
 	#10: Response to ask user if it was a yes or a no -- unclear.
 	[
