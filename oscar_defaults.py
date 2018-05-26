@@ -475,7 +475,8 @@ inputs_array = [
             "\\bokay\\b",
             "\\bok\\b",
             "\\bwalkthrough\\b",
-            "\\bwalk me through\\b"
+            "\\bwalk me through\\b",
+            "\\bwalk through\\b"
         ],
         [
             "\\bno\\b",

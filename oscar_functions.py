@@ -64,20 +64,7 @@ def get_response(index, delimiter = None, replacement = None):
         else:
             return oscar_defaults.responses_array[index][randint(0, len(oscar_defaults.responses_array[index]) - 1)]
     else:
-        original_response = get_response(index)
-        response = ""
-        if delimiter in original_response:
-            delim_index = original_response.find(delimiter)
-            for i in range(0, delim_index):
-                response += original_response[i]
-
-            response += replacement
-
-            for i in range(delim_index + len(delimiter), len(original_response)):
-                response += original_response[i]
-        else:
-            response = original_response
-        return response
+        return get_response(index).replace(delimiter, replacement)
 
 #Greets the user. responses[0] for daytime greetings, responses[1] for nighttime greetings.
 def greet():
