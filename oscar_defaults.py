@@ -28,7 +28,7 @@
 #19: Response to tell user that Oscar won't open a link in their browser
 #20: Response to tell the user that Oscar won't open a link in their browser (No summary)
 #21: Response to tell the user that their command has been scheduled.
-#22: Reponse to ask the user to enter the command to be scheduled.
+#22: Response to ask the user to enter the command to be scheduled.
 #23: Response to tell user that Oscar is opening a link in their browser
 #24: Response to ask the user for their name
 #25: Response to ask the user if they prefer 24-hour or 12-hour clocks
