@@ -278,6 +278,7 @@ responses_array = [
 #12: A response that means the user prefers the 24-hour clock
 #13: A response that means the user prefers the 12-hour clock
 #14: Introductions to the user's name
+#15: A response that means that the user wants Oscar to tell a joke
 inputs_array = [
     #0: Time/date command
     [
@@ -300,6 +301,7 @@ inputs_array = [
             "\\bwhat were\\b",
             "\\bwho was\\b",
             "\\bwho were\\b",
+            "\\bjokes?\\b"
         ]
     ],
     #1: Search command
@@ -325,7 +327,7 @@ inputs_array = [
             "\\bwho were\\b"
         ],
         [
-
+            "\\bjokes?\\b"
         ]
     ],
     #2: Should command
@@ -533,6 +535,16 @@ inputs_array = [
             "\\bthe name is\\b",
             "\\bcall me\\b",
             "\\bi go by\\b"
+        ],
+        [
+
+        ]
+    ],
+    #15: A response that means that the user wants Oscar to tell a joke
+    [
+        [
+            "\\bjoke\\b",
+            "\\bjokes\\b"
         ],
         [
 

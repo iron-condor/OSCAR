@@ -8,6 +8,7 @@ import subprocess
 import collections
 import re
 from random import randint
+import pyjokes
 
 responses = []
 inputs = []
@@ -267,6 +268,10 @@ def should(command):
         option = options[randIndex]
         print(get_response(14, "<option>", option))
 
+def tell_joke():
+    joke_list = pyjokes.jokes_en.neutral
+    print(joke_list[randint(0, len(joke_list) - 1)])
+
 #Receives the command and processes the input appropriately
 def receive_command():
     global responses, inputs, settings, firstTime
@@ -276,11 +281,9 @@ def receive_command():
         settings = oscar_defaults.settings_array
         greet()
         firstTime = False
-
     command = input("").lower()
     contained_keyword = ""
     command_index = -1
-
     for input_type in range(0, len(inputs)):
         if contained_keyword == "":
             for keyword in inputs[input_type][0]:
@@ -309,6 +312,8 @@ def receive_command():
         schedule_shutdown(command)
     elif command_index == 6:
         schedule_command(command)
+    elif command_index == 15:
+        tell_joke()
     elif command_index == 7:
         print(get_response(15))
         sys.exit()
