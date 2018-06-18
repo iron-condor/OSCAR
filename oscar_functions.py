@@ -114,6 +114,8 @@ def open_in_browser(url):
 def search(identifier_string, command):
     index = re.search(identifier_string, command).end()
     query = command[index:]
+    if query.endswith("?"):
+        query = query[:-1]
     if query != "":
         answer = duckduckgo.get_zci(query)
         duck_query = duckduckgo.query(query)

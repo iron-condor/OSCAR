@@ -324,7 +324,8 @@ inputs_array = [
             "\\bwhat was\\b",
             "\\bwhat were\\b",
             "\\bwho was\\b",
-            "\\bwho were\\b"
+            "\\bwho were\\b",
+            "\\bwhat do you know about\\b"
         ],
         [
             "\\bjokes?\\b"
