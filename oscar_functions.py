@@ -271,7 +271,7 @@ def should(command):
         print(get_response(14, "<option>", option))
 
 def tell_joke():
-    joke_list = pyjokes.jokes_en.neutral
+    joke_list = pyjokes.neutral
     print(joke_list[randint(0, len(joke_list) - 1)])
 
 #Receives the command and processes the input appropriately

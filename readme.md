@@ -32,14 +32,15 @@ At the moment, OSCAR can
 * Schedule a shutdown
 * Schedule generic commands
 * Help you make decisions (*Should I stay in for the night, or go out and eat?*)
-
+- Tell you jokes (using [https://github.com/pyjokes/pyjokes](pyjokes!))
 
 ### **Dependencies**
 ---
 
 duckduckgo-python3
 
-xdg-utils
+xdg-utils (if using linux)
+
 
 
 ### **Getting started**
