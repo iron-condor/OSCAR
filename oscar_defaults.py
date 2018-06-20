@@ -368,12 +368,9 @@ inputs_array = [
     #5: Schedule shutdown command
     [
         [
-            "\\bshut down\\b",
-            "\\bshutdown\\b",
-            "\\bpower off\\b",
-            "\\bpoweroff\\b",
-            "\\bpower down\\b",
-            "\\bpowerdown\\b",
+            "\\bshut ?down\\b",
+            "\\bpower ?off\\b",
+            "\\bpower ?down\\b",
             "\\bturn off\\b"
         ],
         [
