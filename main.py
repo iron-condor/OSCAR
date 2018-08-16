@@ -1,9 +1,10 @@
 # Developer: iron-condor
-# Dependencies: duckduckgo-python3 (find on github), xdg-utils
+# Dependencies: duckduckgo-python3, jsonpickle, xdg-utils (if using linux)
 import oscar_defaults
 import oscar_functions
 import sys
 from pathlib import Path
+import jsonpickle
 import json
 import os
 import re
@@ -38,6 +39,22 @@ def walkthrough():
     else:
         print(oscar_functions.get_response(26, "<user>", username))
     settings_array[1] = clock_type
+
+    path_type = None
+    while path_type == None:
+        path_type_raw = input(oscar_functions.get_response(33))
+        for path_string in inputs_array[16][0]:
+            if re.search(path_string, path_type_raw):
+                path_type = 1
+        if path_type == None:
+            for path_string in inputs_array[17][0]:
+                if re.search(path_string, path_type_raw):
+                    path_type = 0
+    if path_type:
+        print(oscar_functions.get_response(34))
+    else:
+        print(oscar_functions.get_response(35))
+    settings_array[2] = path_type
 
 
 #Loads the responses file if it exists. If it doesn't, one is automatically generated for the user.
@@ -87,10 +104,11 @@ def load_inputs():
     except FileNotFoundError:
         print("I don't see an input config. Let me take care of that.")
         inputs = open(inputs_file, 'w')
-        inputs.write(json.dumps(inputs_array, indent=4))
+        inputs.write(jsonpickle.dumps(inputs_array))
         print("There you go! If you need it, it's here: " + str(inputs_file))
     else:
-        oscar_defaults.inputs_array = json.load(inputs)
+        temp_loaded = inputs.read()
+        oscar_defaults.inputs_array = jsonpickle.decode(temp_loaded)
 
 #Loads the settings file if it exists. If it doesn't, it prompts the user to select his/her settings, or allows the user to let oscar generate the defaults.
 def load_settings():
@@ -135,8 +153,35 @@ def load_settings():
     else:
         oscar_defaults.settings_array = json.load(settings)
 
+#Loads the groups file if it exists. If it doesn't, a blank one is automatically generated for the user.
+def load_groups():
+    groups_array = oscar_defaults.groups_array
+    directory = None
+    groups_file = None
+    if sys.platform == "win32":
+        directory = "C:\\Program Files(x86)\\Oscar"
+        groups_file = Path(directory + "\\groups")
+    elif sys.platform == "darwin":
+        directory = str(Path.home()) + "/Library/Preferences/Oscar"
+        groups_file = Path(directory + "/groups")
+    else:
+        directory = str(Path.home()) + "/.config/oscar"
+        groups_file = Path(directory + "/groups")
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+    try:
+        groups = open(groups_file, 'r')
+    except FileNotFoundError:
+        print("It seems you've not got a groups file. Let me fix that for you quickly...")
+        groups = open(groups_file, 'w')
+        groups.write(json.dumps(groups_array, indent=4))
+        print("Finished - have a file path: " + str(groups_file))
+    else:
+        oscar_defaults.groups_array = json.load(groups)
+
 load_responses()
 load_inputs()
+load_groups()
 load_settings()
 while (True):
     oscar_functions.receive_command()

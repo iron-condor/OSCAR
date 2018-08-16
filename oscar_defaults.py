@@ -1,3 +1,4 @@
+import oscar_functions
 #This file contains the defaults for various config files that Oscar uses.
 #All are generated using JSON, which was chosen as a convenient half-way point between English readable text and code.
 #   - Responses
@@ -34,6 +35,16 @@
 #25: Response to ask the user if they prefer 24-hour or 12-hour clocks
 #26: Response to tell the user that they've selected a 24-hour clock
 #27: Response to tell the user that they've selected a 12-hour clock
+#28: Response to tell the user that OSCAR is starting the programs they asked for now
+#29: Response to tell the user that OSCAR is starting the program they asked for now (just one program)
+#30: Response to tell the user that OSCAR could not find the program/programs that were requested
+#31: Response to tell the user that OSCAR found a video on the subject
+#32: Response that pre-runs the list of user settings
+#33: Response to prompt user if they would like to type paths out manually, or be given a file manager.
+#34: Response to tell the user that they've selected to use a file manager
+#35: Response to tell the user that they've elected to type out paths themselves
+#36: Response to tell the user that their settings have been updated
+#37: Response to tell the user that their settings have not been updated
 responses_array = [
     #0: Daytime greetings
     [
@@ -235,7 +246,7 @@ responses_array = [
     #25: Response to ask the user if they prefer 24-hour or 12-hour clocks
     [
         "Next question: Your clock type. 24-hour or 12-hour?\n",
-        "What type of clock do you prefer: 12-hour or 24-hour?\n"
+        "What type of clock do you prefer: 12-hour or 24-hour?\n",
         "<user>. Got it. So what kind of clock do you like, <user>? 24-hour or 12-hour?\n",
         "It's nice to meet you, <user>. Do you prefer the 24-hour or 12-hour clock?\n",
         "Okay <user>, do you prefer your times to be in 24-hour or 12-hour format?\n"
@@ -255,12 +266,88 @@ responses_array = [
         "Strange choice, but it's yours. 12-hour clock, then.",
         "Alright, I'll give you the time in the 12-hour format whenever you ask.",
         "12-hour? Aww. Come to the dark side - we have cookies, and twice the hours on our clock."
+    ],
+    #28: Response to tell the user that OSCAR is starting the programs they asked for now
+    [
+        "Opening them now...",
+        "I'll get those up for you in a jiffy",
+        "They'll be open in just a moment.",
+        "Of course, I'll open those right away.",
+        "Expect those programs to be open shortly"
+    ],
+    #29: Response to tell the user that OSCAR is starting the program they asked for now (just one program)
+    [
+        "I'll open it right now",
+        "Give me just a second, aaaaand it's opening.",
+        "It'll be up in just a second",
+        "It's opening right now, just for you",
+        "Program opened - or rather, it's opening."
+    ],
+    #30: Response to tell the user that OSCAR could not find the program/programs that were requested
+    [
+        "I don't think you've told me about any programs by that name.",
+        "I'm looking at my list, and I don't see any programs called that.",
+        "Are you sure you spelled it right? You haven't told me about any programs named that.",
+        "I may just be illiterate, but I don't see a program named that"
+    ],
+    #31: Response to tell the user that OSCAR found a video on the subject
+    [
+        "Hey! I found a video about that. Want me to play it for you?\n",
+        "They say a picture's worth a thousand words. Personally, I think videos are worth more - care to see one?\n",
+        "Youtube seems to have something appropriate - want me to put it on?\n",
+        "Ooh! A video! Want me to open it?\n",
+        "I've got a youtube video on the subject, just say the word and I'll open it\n"
+    ],
+    #32: Response that pre-runs the list of user settings
+    [
+        "Configure settings? Absolutely! Here are your settings. Which would you like to edit?\n",
+        "Ooh! Changing settings, are we? Well, here they are - just say which setting you want to change.\n",
+        "Here's a list of settings for you to play with. Call it by name, and I'll change it to whatever you like.\n",
+        "I hope I didn't get one of your settings wrong. Here they are, let me know which one you need changed.\n",
+        "If I got something wrong, I'm happy to fix it. Your settings are right below, which do you need changed?\n"
+    ],
+    #33: Response to prompt user if they would like to type paths out manually, or be given a file manager
+    [
+        "Sometimes, I might need to get the location of a file from you. When that comes up, would you like a file manager, or do you just want to type the path out yourself?\n",
+        "Tell me - are you a fan of file managers, or do you prefer to type out paths yourself?\n",
+        "In the event that I need a file from you, would you prefer to be given a file manager, or would you like to type it out manually?\n",
+        "Do you prefer to be given a file manager, or would you rather type out file paths yourself?\n",
+        "At some point, I may have to get a file path from you. Do you want a GUI file manager, or would you rather just type out the path yourself?\n"
+    ],
+    #34: Response to tell the user that they've elected to use a file manager
+    [
+        "Great! I'll give you a file manager when I need files from you, then.",
+        "Awesome! I'll make sure you have something you can click on whenever you choose a file.",
+        "File manager it is. You'll have one to use if I ever need a file from you.",
+        "In that case, I'll give you a GUI to choose your files from, if it's necessary.",
+        "Excellent, if I need a file from you, I'll ensure that you have a window to find it with."
+    ],
+    #35: Response to tell the user that they've elected to type out paths themselves
+    [
+        "File managers are for casuals anyways. I'll let you type out your own paths.",
+        "If I need a file from you, I'll just let you type the path in yourself.",
+        "No file manager? That makes it much easier for both of us.",
+        "I'm glad you like typing out your own file paths - windows are scary, anyway.",
+        "I'll remember that. If I ever need a file from you, rest assured that I'll let you type out the path."
+    ],
+    #36: Response to tell the user that their settings have been updated
+    [
+        "Your settings have been updated. I wish I would be updated more often...",
+        "Updating your settings... and done! Everything is how you asked.",
+        "I've changed your settings how you asked - if you need to change or view them again later, just ask again",
+        "Whoosh! Hear that? It's the sound of your settings being updated. Don't ask me why they make whooshing noises.",
+        "Options optimized - just for you, just as you asked."
+    ],
+    #37: Response to tell the user that their settings have not been updated
+    [
+        "No changes? Wonderful, I'm glad that I got everything right last time.",
+        ""
     ]
 ]
 
 #This array is a bit complicated. The layers are described below
 #The first layer consists of each function. Take for example, the search function
-#The second layer is made up of arrays of the keywords or antikeywords. 0 = keywords, 1 = anti-words.
+#The second layer is made up of arrays of the keywords or antikeywords, as well as a boolean that indicates if the inputs should be interpreted as a command or not. 0 = keywords, 1 = anti-words, 2 = command boolean.
 #The third and final layer is where the keywords/anti-words are stored.
 
 #0: Time/date command
@@ -279,6 +366,9 @@ responses_array = [
 #13: A response that means the user prefers the 12-hour clock
 #14: Introductions to the user's name
 #15: A response that means that the user wants Oscar to tell a joke
+#16: A response that means the user wants a file manager.
+#17: A response that means the user wants to type paths out themselves
+#18: A response that means the user wants to reconfigure their settings
 inputs_array = [
     #0: Time/date command
     [
@@ -302,7 +392,8 @@ inputs_array = [
             "\\bwho was\\b",
             "\\bwho were\\b",
             "\\bjokes?\\b"
-        ]
+        ],
+        oscar_functions.give_time
     ],
     #1: Search command
     [
@@ -313,9 +404,13 @@ inputs_array = [
             "\\bsearching up\\b",
             "\\btell me\\b",
             "\\btell me the\\b",
+            "\\btell me everything about\\b",
+            "\\btell me everything you know about\\b",
             "\\btell me about\\b",
             "\\bwhat is\\b",
             "\\bwhat's\\b",
+            "\\bwhat the fuck is\\b",
+            "\\bwhat the hell is\\b",
             "\\bwhats\\b",
             "\\bwho is\\b",
             "\\bwho's\\b",
@@ -325,11 +420,13 @@ inputs_array = [
             "\\bwhat were\\b",
             "\\bwho was\\b",
             "\\bwho were\\b",
-            "\\bwhat do you know about\\b"
+            "\\bwhat do you know about\\b",
+            "\\bshow me\\b"
         ],
         [
             "\\bjokes?\\b"
-        ]
+        ],
+        oscar_functions.search
     ],
     #2: Should command
     [
@@ -338,18 +435,21 @@ inputs_array = [
         ],
         [
 
-        ]
+        ],
+        oscar_functions.should
     ],
     #3: Launch program command
     [
         [
             "\\blaunch\\b",
             "\\bstart\\b",
+            "\\bstarting\\b",
             "\\bopen\\b"
         ],
         [
 
-        ]
+        ],
+        oscar_functions.launch_program
     ],
     #4: Thank you command
     [
@@ -363,7 +463,8 @@ inputs_array = [
         ],
         [
 
-        ]
+        ],
+        oscar_functions.thanks
     ],
     #5: Schedule shutdown command
     [
@@ -375,7 +476,8 @@ inputs_array = [
         ],
         [
 
-        ]
+        ],
+        oscar_functions.schedule_shutdown
     ],
     #6: Schedule command command
     [
@@ -388,7 +490,8 @@ inputs_array = [
         ],
         [
 
-        ]
+        ],
+        oscar_functions.schedule_command
     ],
     #7: Close command
     [
@@ -410,7 +513,8 @@ inputs_array = [
             "\\bdo not\\b",
             "\\bno\\b",
             "\\bnevermind\\b"
-        ]
+        ],
+        oscar_functions.close_oscar
     ],
     #8: A response that means no
     [
@@ -428,7 +532,8 @@ inputs_array = [
         ],
         [
 
-        ]
+        ],
+        0
     ],
     #9: A response that means yes
     [
@@ -446,7 +551,9 @@ inputs_array = [
             "\\balright\\b",
             "\\bokay\\b",
             "\\bsummary\\b",
-            "\\bok\\b"
+            "\\bok\\b",
+            "\\bmhm\\b",
+            "\\bgo ahead\\b"
         ],
         [
             "\\bno\\b",
@@ -454,7 +561,8 @@ inputs_array = [
             "\\bdon't\\b",
             "\\bdo not\\b",
             "\\bnevermind\\b"
-        ]
+        ],
+        0
     ],
     #10: A response that means the user wants to walk through settings configuration.
     [
@@ -483,18 +591,20 @@ inputs_array = [
             "\\bnot\\b",
             "\\bdon't\\b",
             "\\bdo not\\b"
-        ]
+        ],
+        0
     ],
     #11: A response that means the user wants to use the default settings.
     [
         [
-            "\\bdefaults?\\b",
+            "\\bdefaults\\b",
             "\\bthanks anyways\\b",
             "\\bno thanks\\b"
         ],
         [
 
-        ]
+        ],
+        0
     ],
     #12: A response that means the user prefers the 24-hour clock
     [
@@ -508,6 +618,7 @@ inputs_array = [
         [
 
         ],
+        0
     ],
     #13: A response that means the user prefers the 12-hour clock
     [
@@ -520,7 +631,8 @@ inputs_array = [
         ],
         [
 
-        ]
+        ],
+        0
     ],
     #14: Introductions to the user's name
     [
@@ -532,21 +644,73 @@ inputs_array = [
             "\\bthe name's\\b",
             "\\bthe name is\\b",
             "\\bcall me\\b",
-            "\\bi go by\\b"
+            "\\bi go by\\b",
+            "\\bbe called\\b"
         ],
         [
 
-        ]
+        ],
+        0
     ],
     #15: A response that means that the user wants Oscar to tell a joke
     [
         [
             "\\bjoke\\b",
-            "\\bjokes\\b"
+            "\\bjokes\\b",
+            "\\blaugh\\b"
         ],
         [
 
-        ]
+        ],
+        oscar_functions.tell_joke
+    ],
+    #16: A response that means the user wants a file manager.
+    [
+        [
+            "\\bfile manager\\b",
+            "\\bmanager\\b",
+            "\\bgui\\b",
+            "\\bwindow\\b"
+        ],
+        [
+            "\\bdon't need\\b",
+            "\\bdon't want\\b"
+        ],
+        0
+    ],
+    #17: A response that means the user wants to type paths out themselves
+    [
+        [
+            "\\btype\\b",
+            "\\btyped\\b",
+            "\\btyping\\b",
+            "\\bon my own\\b",
+            "\\bmyself\\b"
+        ],
+        [
+
+        ],
+        0
+    ],
+    #18: A response that means the user wants to reconfigure their settings
+    [
+        [
+            "\\bconfigure\\b",
+            "\\bconfiguring\\b",
+            "\\bconfigured\\b",
+            "\\breconfigure\\b",
+            "\\breconfiguring\\b",
+            "\\breconfigured",
+            "\\bsettings\\b",
+            "\\badjust\\b",
+            "\\badjusting\\b",
+            "\\badjusted\\b",
+            "\\boptions\\b"
+        ],
+        [
+
+        ],
+        oscar_functions.configure_settings
     ]
 ]
 #The settings array is responsible for managing the user's various settings and preferences.
@@ -556,5 +720,33 @@ settings_array = [
     #0: The name that the user wishes to be called
     "nameless",
     #1: 24-hour or 12-hour clock. 0 = 24-hour, 1 = twelve-hour
+    1,
+    #2: Let the user type out paths to files, or give them a file manager. 0 = Type it out, 1 = File manager
     1
+]
+#The groups array manages the programs that the user has told OSCAR about, and their respective aliases. It also maintains groups of these applications, under their own aliases
+#"Groups" are sets of applications that OSCAR associates with particular phrases or words
+groups_array = [
+    #This section houses a list of programs that the user has on their computer.
+    [
+        #Aliases for the programs, The index corresponds to the index of the executable path.
+        [
+            [], [], []
+        ],
+        #The executable paths for the programs. The index corresponds to the index of the alias.
+        [
+
+        ]
+    ],
+    #This section maintains the list of groups that the user has created.
+    [
+        #Aliases for the groups. The index corresponds to the index of the executable path.
+        [
+
+        ],
+        #The lists of aliases for the various applications in each group
+        [
+            [], [], []
+        ]
+    ]
 ]

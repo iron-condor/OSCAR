@@ -8,18 +8,30 @@ import subprocess
 import collections
 import re
 from random import randint
+from tkinter import filedialog
+from tkinter import *
 import pyjokes
+from pathlib import Path
+import json
 
 responses = []
 inputs = []
 settings = []
+groups = []
 firstTime = True
+command = None
 
 #Runs commands as a detached subprocess. In other words, if OSCAR is closed, the commands ran here continue existing.
 #Used in command scheduling, alongside with the /usr/bin/sleep command.
 #Sample input: subprocess_cmd("sleep 60 && poweroff")
 def subprocess_cmd(bash_command):
-    subprocess.Popen(bash_command,stdout=subprocess.PIPE, shell=True, preexec_fn=os.setpgrp)
+    subprocess.Popen(bash_command,stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True, preexec_fn=os.setpgrp)
+
+def open_file_manager(location):
+    root = Tk()
+    root.withdraw()
+    root.filename = filedialog.askopenfilename(initialdir = location, title = "Select file")
+    return root.filename
 
 #Decides if a particular string is a positive or negative statement. In other words, it can read a string as yes/no.
 #If the type is none, it checks if the string means yes
@@ -111,7 +123,13 @@ def open_in_browser(url):
             get_response(7, "<url>", url)
 
 #Searches and interprets a given string. Can extract summaries from some sites and services. Uses duckduckgo
-def search(identifier_string, command):
+def search():
+    global command, inputs
+    identifier_string = None
+    for string in inputs[1][0]:
+        if re.search(string, command):
+            identifier_string = string
+            break
     index = re.search(identifier_string, command).end()
     query = command[index:]
     if query.endswith("?"):
@@ -128,7 +146,10 @@ def search(identifier_string, command):
                 else:
                     print(get_response(19))
             elif answer.startswith("http"):
-                confirm = input(get_response(3)).lower()
+                if answer.startswith("https://www.youtu.be") or answer.startswith("https://www.youtube.com"):
+                    confirm = input(get_response(31))
+                else:
+                    confirm = input(get_response(3)).lower()
                 if get_yes_no(confirm):
                     open_in_browser(answer)
                 else:
@@ -147,7 +168,8 @@ def search(identifier_string, command):
         print(get_response(2))
 
 #Returns the time in seconds until a scheduled event. Interprets text from the user in standard time units
-def schedule(command):
+def schedule():
+    global command
     time_units = collections.OrderedDict([
         ("\\bsecs?\\b|\\bseconds?\\b", 1),
         ("\\bmins?\\b|\\bminutes?\\b", 60),
@@ -216,8 +238,9 @@ def schedule(command):
         print(get_response(11))
 
 #Schedules a command to be executed after a given time period.
-def schedule_command(command):
-    time = schedule(command)
+def schedule_command():
+    global command
+    time = schedule()
     if time != None:
         bash_command = None;
         if "\"" in command:
@@ -232,8 +255,9 @@ def schedule_command(command):
         print(get_response(21))
 
 #Schedules a shutdown to be performed after a given time period.
-def schedule_shutdown(command):
-    time = schedule(command)
+def schedule_shutdown():
+    global command
+    time = schedule()
     if time != None:
         shell_command = None
         if sys.platform == "win32":
@@ -249,7 +273,8 @@ def schedule_shutdown(command):
 #It offers 2 variants
 #   - "Or" mode: Tells the user if they should perform one action, "or" another
 #   - "Yes/no" mode: Responds as to whether the user should or should not do one particular action.
-def should(command):
+def should():
+    global command
     #If we're in yes/no mode
     if " or " not in command.lower():
         if randint(0, 1):
@@ -274,20 +299,111 @@ def tell_joke():
     joke_list = pyjokes.neutral
     print(joke_list[randint(0, len(joke_list) - 1)])
 
+def launch_program():
+    global command
+    command = command.lower()
+    confirmed_aliases = []
+    alias_paths = []
+    #Searches the "command" for aliases, and adds their info to the above lists
+    for alias_group in groups[0][0]:
+        for alias in alias_group:
+            if re.search(alias, command):
+                #Add the alias to the list
+                confirmed_aliases.append(alias)
+                #Add its file path to the list
+                alias_paths.append(groups[0][1][groups[0][0].index(alias_group)])
+    for path in alias_paths:
+        subprocess_cmd(path)
+    if (len(confirmed_aliases) > 1):
+        print(get_response(28))
+    elif (len(confirmed_aliases) > 0):
+        print(get_response(29))
+    else:
+        print(get_response(30))
+
+#Allows the user to view and adjust their settings
+def configure_settings():
+    global settings, inputs;
+    print(get_response(32))
+    setting_changed = 0
+    print("Name: " + settings[0])
+    clock_type = "12-hour" if settings[1] else "24-hour"
+    print("Clock type: " + clock_type)
+    path_chooser = "File manager" if settings[2] else "Let me type it out"
+    print("File path chooser: " + path_chooser)
+    to_change = input("").lower()
+    if "name" in to_change:
+        settings[0] = input("Name: ")
+        setting_changed = 1
+    if "clock" in to_change:
+        clock_type = None
+        clock_type_raw = input("New clock type: ")
+        for clock_string in inputs[12][0]:
+            if re.search(clock_string, clock_type_raw):
+                clock_type = 0
+        if clock_type == None:
+            for clock_string in inputs[13][0]:
+                if re.search(clock_string, clock_type_raw):
+                    clock_type = 1
+        settings[1] = clock_type
+        setting_changed = 1
+    if "file" in to_change or "path" in to_change:
+        path_type = None
+        path_type_raw = input("File path chooser: ")
+        for path_string in inputs[16][0]:
+            if re.search(path_string, path_type_raw):
+                path_type = 1
+        if path_type == None:
+            for path_string in inputs[17][0]:
+                if re.search(path_string, path_type_raw):
+                    path_type = 0
+        settings[2] = path_type
+        setting_changed = 1
+    if setting_changed:
+        settings_file = None
+        if sys.platform == "win32":
+            directory = "C:\\Program Files(x86)\\Oscar"
+            settings_file = Path(directory + "\\settings")
+        elif sys.platform == "darwin":
+            directory = str(Path.home()) + "/Library/Preferences/Oscar"
+            settings_file = Path(directory + "/settings")
+        else:
+            directory = str(Path.home()) + "/.config/oscar"
+            settings_file = Path(directory + "/settings")
+        final_settings = open(settings_file, 'w')
+        final_settings.write(json.dumps(settings, indent=4))
+        print(get_response(36))
+    else:
+        print(get_response(37))
+
+
+#Adds a program to the list of programs that Oscar recognizes
+def add_program(command):
+    print("TODO")
+
+#Responds to the user thanking oscar
+def thanks():
+    print(get_response(6))
+
+#Closes the program. This function exists due to an error in jsonpickle, in which sys.exit() is mistakenly serialized as a dictionary
+def close_oscar():
+    sys.exit()
+
 #Receives the command and processes the input appropriately
 def receive_command():
-    global responses, inputs, settings, firstTime
+    global responses, inputs, settings, groups, firstTime, command
     if firstTime:
         responses = oscar_defaults.responses_array
         inputs = oscar_defaults.inputs_array
         settings = oscar_defaults.settings_array
+        groups = oscar_defaults.groups_array
         greet()
         firstTime = False
     command = input("").lower()
     contained_keyword = ""
-    command_index = -1
+    found_keyword = False
     for input_type in range(0, len(inputs)):
-        if contained_keyword == "":
+        if contained_keyword == "" and inputs[input_type][2] != 0:
             for keyword in inputs[input_type][0]:
                 if re.search(keyword, command):
                     contained_keyword = keyword
@@ -296,28 +412,8 @@ def receive_command():
                     if re.search(antiword, command):
                         contained_keyword = ""
         if contained_keyword != "":
-            command_index = input_type
+            found_keyword = True
+            inputs[input_type][2]()
             break
-
-    #Perform the appropriate command
-    if command_index == 0:
-        give_time()
-    elif command_index == 1:
-        search(contained_keyword, command)
-    elif command_index == 2:
-        should(command)
-    elif command_index == 3:
-        launch_program(command)
-    elif command_index == 4:
-        print(get_response(6))
-    elif command_index == 5:
-        schedule_shutdown(command)
-    elif command_index == 6:
-        schedule_command(command)
-    elif command_index == 15:
-        tell_joke()
-    elif command_index == 7:
-        print(get_response(15))
-        sys.exit()
-    else:
+    if not found_keyword:
         print(get_response(16))
