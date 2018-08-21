@@ -485,8 +485,8 @@ inputs_array = [
             "\\bschedule\\b",
             "\\bseco?n?d?s?\\b",
             "\\bminu?t?e?s?\\b",
-            "\\bhour\\b",
-            "\\bday\\b"
+            "\\bhours?\\b",
+            "\\bdays?\\b"
         ],
         [
 

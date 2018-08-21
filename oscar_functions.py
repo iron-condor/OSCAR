@@ -173,8 +173,8 @@ def schedule():
     time_units = collections.OrderedDict([
         ("\\bsecs?\\b|\\bseconds?\\b", 1),
         ("\\bmins?\\b|\\bminutes?\\b", 60),
-        ("\\bhour\\b", 3600),
-        ("\\bday\\b", 86400)
+        ("\\bhours?\\b", 3600),
+        ("\\bdays?\\b", 86400)
     ])
     total_time = 0.0
     for key in time_units:
