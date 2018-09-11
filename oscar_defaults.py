@@ -45,6 +45,13 @@ import oscar_functions
 #35: Response to tell the user that they've elected to type out paths themselves
 #36: Response to tell the user that their settings have been updated
 #37: Response to tell the user that their settings have not been updated
+#38: Response to prompt the user to select the file for the new program they wish to add
+#39: Response to tell the user that it isn't a valid file path
+#40: Response to prompt the user to enter aliases for the program
+#41: Response to tell the user how to enter multiple names
+#42: Response to tell the user that their program has been added
+#43: Response to tell the user that they've already registered that program
+#44: Response to tell the user that there are already aliases by that name
 responses_array = [
     #0: Daytime greetings
     [
@@ -341,7 +348,66 @@ responses_array = [
     #37: Response to tell the user that their settings have not been updated
     [
         "No changes? Wonderful, I'm glad that I got everything right last time.",
-        ""
+        "I wouldn't change anything, either - they're perfect as they are c:",
+        "No changes it is! I'll just leave your settings be.",
+        "I'm glad that you're satisfied with your settings - I won't touch them, then.",
+        "If no changes are necessary, I'll just leave them be."
+    ],
+    #38: Response to prompt the user to select the file for the new program they wish to add
+    [
+        "Adding a new program? Sweet! I could use some company. Where's the file at?",
+        "Ooooh? A new program, huh? Point me to it.",
+        "Point me to the app you want to add, and I'll register it.",
+        "I love new applications! Where's it at?",
+        "You want to add a new program? Okay, just point me to it."
+    ],
+    #39: Response to tell the user that it isn't a valid file path
+    [
+        "That's strange, I can't seem to find a file at that location. Try again?",
+        "This is odd... to me, it looks like there's no file at that path. Would you try again, please?",
+        "There's doesn't seem to be a file there - are you sure it's there? Try it again, please.",
+        "I'm looking as hard as I can, but I still can't find a file there. Can you try again?",
+        "Filesystems, much like fate, work in mysterious ways - and right now I can't find that file. Try again, would you?"
+    ],
+    #40: Response to prompt the user to enter aliases for the program
+    [
+        "I've got the file - now what do you want to call it?",
+        "File acquired - what's its name?",
+        "Aaaaand there it is! Exactly where you said it would be. What would you like to call this program?",
+        "Hey! There it is! What's this program's name?",
+        "I found the file you mentioned, now what would you like me to refer to it as?"
+    ],
+    #41: Response to tell the user how to enter multiple names
+    [
+        "You can enter multiple names, just separate them by commas and a space.",
+        "If you like, you can put more than one name - simply separate the names by commas and a space.",
+        "If the file's got a nickname or two, you can also tell me about those - just separate them with commas and a space.",
+        "If you want to call that program by more than one name, just list the others as well, separated by commas and a space.",
+        "Some programs have more than one name - if you want me to remember another name for this program, just put it after the first, with a comma and a space."
+    ],
+    #42: Response to tell the user that their program has been added
+    [
+        "Program added! It's a little less lonely here, now.",
+        "Your program has been added",
+        "Aaaand I've added your application.",
+        "I'll remember that app, now, in case you want to reference it in the future.",
+        "App added. I'll remember it now, if you need me to do anything with it."
+    ],
+    #43: Response to tell the user that they've already registered that program
+    [
+        "Looks like you've already registered that program. No need to register it again",
+        "It seems like you've already told me about that program - you don't need to tell me about it again",
+        "I can remember this app from before - I still remember it, don't worry.",
+        "I've already got this app registered - no need to re-register it",
+        "My memory isn't that bad - I still remember where this program is from last time, so don't worry."
+    ],
+    #44: Response to tell the user that all of the aliases they gave are already in use
+    [
+        "All of the names you gave me are already in use - can you give me some other names, instead?\n",
+        "I'm afraid I can't use names that are already being used. What's another name you can call that program?\n",
+        "Those names are taken, I'm afraid. What other names do you have?\n",
+        "Looks like there are programs called that already - what else can you call this one?\n",
+        "Strange, there's an application that's already called that. Is there anything else you can call it?\n"
     ]
 ]
 
@@ -369,6 +435,7 @@ responses_array = [
 #16: A response that means the user wants a file manager.
 #17: A response that means the user wants to type paths out themselves
 #18: A response that means the user wants to reconfigure their settings
+#19: A response that means the user wants to add a new program
 inputs_array = [
     #0: Time/date command
     [
@@ -711,6 +778,42 @@ inputs_array = [
 
         ],
         oscar_functions.configure_settings
+    ],
+    #19: A response that means the user wants to add a new program
+    [
+        [
+            "\\badd an application\\b",
+            "\\badd a program\\b",
+            "\\badd an app\\b",
+            "\\badd a new application\\b",
+            "\\badd a new program\\b",
+            "\\badd a new app\\b",
+            "\\badding a new application\\b",
+            "\\badding a new program\\b",
+            "\\badding a new app\\b",
+            "\\btell you about an application\\b",
+            "\\btell you about a program\\b",
+            "\\btell you about an app\\b",
+            "\\btell you about a new application\\b",
+            "\\btell you about a new program\\b",
+            "\\btell you about a new app\\b",
+            "\\bregister an application\\b",
+            "\\bregister a program\\b",
+            "\\bregister an app\\b",
+            "\\bregister a new application\\b",
+            "\\bregister a new program\\b",
+            "\\bregister a new app\\b",
+            "\\bregistering an application\\b",
+            "\\bregistering a program\\b",
+            "\\bregistering an app\\b",
+            "\\bregistering a new application\\b",
+            "\\bregistering a new program\\b",
+            "\\bregistering a new app\\b"
+        ],
+        [
+
+        ],
+        oscar_functions.add_program
     ]
 ]
 #The settings array is responsible for managing the user's various settings and preferences.
