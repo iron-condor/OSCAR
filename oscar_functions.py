@@ -307,6 +307,7 @@ def launch_program():
     #Searches the "command" for aliases, and adds their info to the above lists
     for alias_group in groups[0][0]:
         for alias in alias_group:
+            alias = "\\b" + alias + "\\b"
             if re.search(alias, command):
                 #Add the alias to the list
                 confirmed_aliases.append(alias)
