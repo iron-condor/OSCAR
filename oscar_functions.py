@@ -300,7 +300,7 @@ def tell_joke():
     print(joke_list[randint(0, len(joke_list) - 1)])
 
 def launch_program():
-    global command
+    global command, groups
     command = command.lower()
     confirmed_aliases = []
     alias_paths = []
@@ -309,10 +309,15 @@ def launch_program():
         for alias in alias_group:
             alias = "\\b" + alias + "\\b"
             if re.search(alias, command):
-                #Add the alias to the list
-                confirmed_aliases.append(alias)
-                #Add its file path to the list
-                alias_paths.append(groups[0][1][groups[0][0].index(alias_group)])
+                contains_alias = False
+                for path in alias_paths:
+                    if path == groups[0][1][groups[0][0].index(alias_group)]:
+                        contains_alias = True
+                if not contains_alias:
+                    #Add the alias to the list
+                    confirmed_aliases.append(alias)
+                    #Add its file path to the list
+                    alias_paths.append(groups[0][1][groups[0][0].index(alias_group)])
     for path in alias_paths:
         subprocess_cmd(path)
     if (len(confirmed_aliases) > 1):
@@ -390,8 +395,9 @@ def add_program():
     else:
         while True:
             file_path = input()
+            program = file_path.split(" ")[0]
             #If the file is there, break out of the loop
-            if os.path.isfile(file_path):
+            if os.path.isfile(program):
                 break
             #If it isn't, prompt the user to reselect the file
             else:

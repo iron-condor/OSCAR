@@ -1,4 +1,3 @@
-# Developer: iron-condor
 # Dependencies: duckduckgo-python3, jsonpickle, xdg-utils (if using linux)
 import oscar_defaults
 import oscar_functions
