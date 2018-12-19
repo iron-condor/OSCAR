@@ -1,4 +1,5 @@
 import oscar_functions
+import actions
 #This file contains the defaults for various config files that Oscar uses.
 #All are generated using JSON, which was chosen as a convenient half-way point between English readable text and code.
 #   - Responses
@@ -460,7 +461,7 @@ inputs_array = [
             "\\bwho were\\b",
             "\\bjokes?\\b"
         ],
-        oscar_functions.give_time
+        actions.give_time
     ],
     #1: Search command
     [
@@ -493,7 +494,7 @@ inputs_array = [
         [
             "\\bjokes?\\b"
         ],
-        oscar_functions.search
+        actions.search
     ],
     #2: Should command
     [
@@ -503,7 +504,7 @@ inputs_array = [
         [
 
         ],
-        oscar_functions.should
+        actions.should
     ],
     #3: Launch program command
     [
@@ -516,7 +517,7 @@ inputs_array = [
         [
 
         ],
-        oscar_functions.launch_program
+        actions.launch_program
     ],
     #4: Thank you command
     [
@@ -531,7 +532,7 @@ inputs_array = [
         [
 
         ],
-        oscar_functions.thanks
+        actions.thanks
     ],
     #5: Schedule shutdown command
     [
@@ -544,7 +545,7 @@ inputs_array = [
         [
 
         ],
-        oscar_functions.schedule_shutdown
+        actions.schedule_shutdown
     ],
     #6: Schedule command command
     [
@@ -558,7 +559,7 @@ inputs_array = [
         [
 
         ],
-        oscar_functions.schedule_command
+        actions.schedule_command
     ],
     #7: Close command
     [
@@ -729,7 +730,7 @@ inputs_array = [
         [
 
         ],
-        oscar_functions.tell_joke
+        actions.tell_joke
     ],
     #16: A response that means the user wants a file manager.
     [
@@ -777,7 +778,7 @@ inputs_array = [
         [
 
         ],
-        oscar_functions.configure_settings
+        actions.configure_settings
     ],
     #19: A response that means the user wants to add a new program
     [
@@ -813,7 +814,7 @@ inputs_array = [
         [
 
         ],
-        oscar_functions.add_program
+        actions.add_program
     ]
 ]
 #The settings array is responsible for managing the user's various settings and preferences.
