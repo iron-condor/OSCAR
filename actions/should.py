@@ -12,7 +12,7 @@ def should():
             print(oscar_functions.get_response(17))
         else:
             print(oscar_functions.get_response(18))
-    elif " or " in command:
+    elif " or " in oscar_functions.command:
         #Cut out the "should i" part of the string
         should_index = oscar_functions.command.find("should ")
         #The string "should " is 7 characters

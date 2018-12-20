@@ -32,8 +32,8 @@ At the moment, OSCAR can
 * Schedule a shutdown
 * Schedule generic commands
 * Help you make decisions (*Should I stay in for the night, or go out and eat?*)
-- Tell you jokes (using [https://github.com/pyjokes/pyjokes](pyjokes!))
-- Launch programs for you
+* Tell you jokes (using [https://github.com/pyjokes/pyjokes](pyjokes!))
+* Launch programs for you
 
 ### **Dependencies**
 ---
