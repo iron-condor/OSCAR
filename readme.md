@@ -42,7 +42,7 @@ duckduckgo-python3
 
 xdg-utils (if using linux)
 
-
+tkinter
 
 ### **Getting started**
 
