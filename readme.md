@@ -44,6 +44,8 @@ xdg-utils (if using linux)
 
 tkinter
 
+jsonpickle
+
 ### **Getting started**
 
 Starting with OSCAR is easy - just open the program in a terminal and start talking to him.
