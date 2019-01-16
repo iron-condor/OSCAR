@@ -835,7 +835,7 @@ groups_array = [
     [
         #Aliases for the programs, The index corresponds to the index of the executable path.
         [
-            [], [], []
+
         ],
         #The executable paths for the programs. The index corresponds to the index of the alias.
         [
@@ -850,7 +850,7 @@ groups_array = [
         ],
         #The lists of aliases for the various applications in each group
         [
-            [], [], []
+
         ]
     ]
 ]
