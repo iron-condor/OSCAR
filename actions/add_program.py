@@ -1,4 +1,4 @@
-import oscar_functions
+import oscar_functions, oscar_defaults
 import os, sys, json
 from pathlib import Path
 #Adds a program to the list of programs that Oscar recognizes
@@ -55,7 +55,7 @@ def add_program():
                 print(oscar_functions.get_response(44))
             else:
                 aliases_raw = [aliases_raw]
-                groups[0][0].append(aliases_raw)
+                oscar_functions.groups[0][0].append(aliases_raw)
                 break
     groups_array = oscar_defaults.groups_array
     directory = None
