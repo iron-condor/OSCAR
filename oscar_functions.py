@@ -112,7 +112,7 @@ def schedule():
         confirm = input(get_response(8, "<time_string>", time_string)).lower()
         while True:
             if get_yes_no(confirm):
-                return orig_total_time
+                return total_time
             elif get_yes_no(confirm, 1):
                 print(get_response(9))
                 break
