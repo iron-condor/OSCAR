@@ -108,41 +108,7 @@ def schedule():
                 except Exception:
                     continue
     if total_time != 0:
-        time_string = ""
-        orig_total_time = total_time
-        days = int(total_time // 86400)
-        if days > 0:
-            total_time -= (days * 86400)
-            if days > 1:
-                time_string += str(days) + " days "
-            else:
-                time_string += str(days) + " day "
-
-        hours = int(total_time // 3600)
-        if hours > 0:
-            total_time -= (hours * 3600)
-            if hours > 1:
-                time_string += str(hours) + " hours "
-            else:
-                time_string += str(hours) + " hour "
-
-        minutes = int(total_time // 60)
-        if minutes > 0:
-            total_time -= (minutes * 60)
-            if minutes > 1:
-                time_string += str(minutes) + " minutes "
-            else:
-                time_string += str(minutes) + " minute "
-        seconds = int(total_time)
-        if seconds > 0:
-            if time_string:
-                time_string += "and"
-            if seconds > 1:
-                time_string += " " + str(seconds) + " seconds"
-            else:
-                time_string += " 1 second"
-        else:
-            time_string = time_string[:len(time_string) - 1]
+        time_string = convert_and_format_time(total_time)
         confirm = input(get_response(8, "<time_string>", time_string)).lower()
         while True:
             if get_yes_no(confirm):
@@ -159,6 +125,45 @@ def schedule():
 #Closes the program. This function exists due to an error in jsonpickle, in which sys.exit() is mistakenly serialized as a dictionary
 def close_oscar():
     sys.exit()
+
+#Takes time in seconds as an argument, and converts it to the lowest expressable value in days/hours/minutes/seconds
+def convert_and_format_time(total_time):
+    time_string = ""
+    orig_total_time = total_time
+    days = int(total_time // 86400)
+    if days > 0:
+        total_time -= (days * 86400)
+        if days > 1:
+            time_string += str(days) + " days "
+        else:
+            time_string += str(days) + " day "
+
+    hours = int(total_time // 3600)
+    if hours > 0:
+        total_time -= (hours * 3600)
+        if hours > 1:
+            time_string += str(hours) + " hours "
+        else:
+            time_string += str(hours) + " hour "
+
+    minutes = int(total_time // 60)
+    if minutes > 0:
+        total_time -= (minutes * 60)
+        if minutes > 1:
+            time_string += str(minutes) + " minutes "
+        else:
+            time_string += str(minutes) + " minute "
+    seconds = float(total_time)
+    if seconds > 0:
+        if time_string:
+            time_string += "and"
+        if seconds > 1 or seconds < 1:
+            time_string += " %.3f seconds" % seconds
+        else:
+            time_string += " 1 second"
+    else:
+        time_string = time_string[:len(time_string) - 1]
+    return time_string
 
 #Receives the command and processes the input appropriately
 def receive_command():

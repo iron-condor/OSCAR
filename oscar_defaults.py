@@ -53,6 +53,8 @@ import actions
 #42: Response to tell the user that their program has been added
 #43: Response to tell the user that they've already registered that program
 #44: Response to tell the user that there are already aliases by that name
+#45: Response to tell the user that a stopwatch has been started
+#46: Response to tell the user how much time passed
 responses_array = [
     #0: Daytime greetings
     [
@@ -409,6 +411,22 @@ responses_array = [
         "Those names are taken, I'm afraid. What other names do you have?\n",
         "Looks like there are programs called that already - what else can you call this one?\n",
         "Strange, there's an application that's already called that. Is there anything else you can call it?\n"
+    ],
+    #45: Response to tell the user that a stopwatch has been started
+    [
+        "Aaand, the clock has started! Press enter when you're ready to stop.",
+        "Ready, set... go! Oh, and by the way - when you're ready to stop timing, press enter.",
+        "Okay, I'm timing. Press enter when you're finished",
+        "Stopwatch started. Press enter to stop timing.",
+        "Let the stopwatch begin! You can press enter if you want the stopwatch to stop."
+    ],
+    #46: Response to tell the user how much time passed
+    [
+        "Done! Here's your time: <time_string>",
+        "Time: <time_string>",
+        "That took <time_string>",
+        "Final time: <time_string>",
+        "Finished. <time_string>"
     ]
 ]
 
@@ -437,11 +455,18 @@ responses_array = [
 #17: A response that means the user wants to type paths out themselves
 #18: A response that means the user wants to reconfigure their settings
 #19: A response that means the user wants to add a new program
+#20: Stopwatch command
 inputs_array = [
     #0: Time/date command
     [
         [
-            "\\btime\\b",
+            "\\bwhat time is it\\b",
+            "\\bwhat is the time\\b",
+            "\\bhow much is the clock\\b",
+            "\\bwhat day is it\\b",
+            "\\bwhat is the day\\b",
+            "\\bhwhat date is it\\b",
+            "\\bwhat is the date\\b",
             "\\bday\\b",
             "\\bdate\\b"
         ],
@@ -815,6 +840,20 @@ inputs_array = [
 
         ],
         actions.add_program
+    ],
+    #20: Stopwatch command
+    [
+        [
+            "\\bstopwatch\\b",
+            "\\bstart timing\\b",
+            "\\btime me\\b",
+            "\\btime this\\b",
+            "\\btime something\\b"
+        ],
+        [
+
+        ],
+        actions.stopwatch
     ]
 ]
 #The settings array is responsible for managing the user's various settings and preferences.
