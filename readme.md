@@ -34,6 +34,7 @@ At the moment, OSCAR can
 * Help you make decisions (*Should I stay in for the night, or go out and eat?*)
 * Tell you jokes (using [https://github.com/pyjokes/pyjokes](pyjokes!))
 * Launch programs for you
+* Time things for you
 
 ### **Dependencies**
 ---
