@@ -8,6 +8,9 @@ def add_program():
     file_path = None
     if oscar_functions.settings[2]:
         file_path = oscar_functions.open_file_manager(Path.home())
+        #If the user didn't choose a file
+        if len(file_path) == 0:
+            return
     #If the user prefers to type out paths manually
     else:
         while True:

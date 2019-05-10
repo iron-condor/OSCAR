@@ -599,7 +599,8 @@ inputs_array = [
             "\\blater\\b",
             "\\bsee you later\\b",
             "\\bcya\\b",
-            "\\bsee you\\b"
+            "\\bsee you\\b",
+            ":q"
         ],
         [
             "\\bdon't\\b",
