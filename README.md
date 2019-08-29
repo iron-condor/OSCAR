@@ -12,22 +12,15 @@
 
 OSCAR generates a few files when you first start him. He'll notify you as to where they're at, but for reference, they're located here
 #### Windows
-`C:\\Program Files(x86)\\Oscar\\groups`
+`C:\Program Files(x86)\Oscar\`
 #### macOS
-`~/Library/Preferences/Oscar/groups`
+`~/Library/Preferences/Oscar/`
 #### Linux
-`~/.config/oscar/groups`
+`~/.config/oscar/`
 
 Each file is formatted using JSON, and has its own purpose
 
-
-The inputs file controls what strings and keywords OSCAR interprets to be a certain command.
-
-
-The responses file manages OSCAR's responses to various stimuli.
-
-
-With these two files, you can customize OSCAR to be able to use and understand any type of vernacular. If you plan on adding new functions to OSCAR, you'll need to update these files accordingly.
+With these files, you can customize OSCAR to be able to use and understand any type of vernacular. If you plan on adding new functions to OSCAR, you'll need to update these files accordingly. Documentation on all of the files can be found on the wiki, or in the [oscar_defaults.py file](https://www.notabug.org/ironcondor/OSCAR/src/master/oscar_defaults.py)
 
 ### **Features**
 ---
