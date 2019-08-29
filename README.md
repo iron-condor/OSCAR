@@ -17,6 +17,7 @@ OSCAR generates a few files when you first start him. He'll notify you as to whe
 `~/Library/Preferences/Oscar/groups`
 #### Linux
 `~/.config/oscar/groups`
+
 Each file is formatted using JSON, and has its own purpose
 
 
