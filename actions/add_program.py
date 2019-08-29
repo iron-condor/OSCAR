@@ -1,8 +1,10 @@
+"""Prompts the user to add a new program to the list of programs that OSCAR knows about"""
 import oscar_functions, oscar_defaults
 import os, sys, json
 from pathlib import Path
-#Adds a program to the list of programs that Oscar recognizes
+
 def add_program():
+    """Method that prompts the user to add a new program to OSCAR's list"""
     print(oscar_functions.get_response(38))
     #If the user wants a file manager
     file_path = None

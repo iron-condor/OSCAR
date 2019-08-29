@@ -1,3 +1,89 @@
+"""Contains a list of inputs and outputs that OSCAR recognizes, as well as application groups and settings.
+
+    Responses
+    ---------
+    The responses list is a list of all responses OSCAR has to choose from.
+    Generally speaking, there are five responses for each possible situation, although the number varies.
+    Responses are indexed in a specific order, which OSCAR uses to call them.
+    This system may be deprecated in the future, and replaced with a cleaner OOP solution.
+    The string may contain a token to be replaced in the string that the user sees, such as <user>.
+    There is no fixed list of these, they may be any token that you wish. The only requirement is that
+    you use the same token that you pass to oscar_functions.get_response()
+
+    Inputs
+    ------
+    The inputs list is a list of regex strings that OSCAR recognizes as inputs for a given command.
+    This system will be deprecated in later versions, and replaced with a machine learning driven
+    classification algorithm. However, for the moment, the system relies on this input list.
+    It is important to note that if you do not want the input to call a given function,
+    you may simply pass 0 as the method to be called.
+
+    Structure
+    ---------
+    [
+        [
+            <A list of strings that OSCAR associates with this category>
+        ],
+        [
+            <A list of strings that the system commonly mislabels as this category>
+            If any of these substrings are found in the user input string, OSCAR will not
+            label the input as this category.
+        ],
+        <Method to be called>
+    ]
+
+    Settings
+    --------
+    A list of settings that the user can configure to customize OSCAR. It adheres to the following structure
+    [
+        name : string
+            The name that the user wishes to be addressed by
+        clock type : int
+            The clock type that the user wishes to use. 0 = 24 hour, 1 = 12 hour
+        file location method : int
+            The method that the user wants OSCAR to use to prompt them for file locations.
+            0 = just let the user type it out, 1 = give them a file explorer window
+    ]
+
+    Groups
+    ------
+    A list that houses the programs that the user has told OSCAR about, and their respective aliases, as well as groups.
+
+    "Groups" are sets of applications that OSCAR associates with particular phrases or words
+
+        Structure
+        ---------
+        [
+            This section houses a list of programs that the user has on their computer.
+            [
+                Aliases for the programs, The index corresponds to the index of the executable path.
+                [
+                    [<String>],
+                    [<String>, <String>],
+                    [<String>, <String>, <String>]
+                ],
+                The executable paths for the programs. The index corresponds to the index of the alias.
+                [
+                    <Path>, <Path>, <Path>
+                ]
+            ],
+            This section maintains the list of groups that the user has created.
+            [
+                #Aliases for the groups. The index corresponds to the index of the executable path.
+                [
+                    [<String>, <String>],
+                    [<String>, <String>, <String>],
+                    [<String>]
+                ],
+                #The lists of aliases for the various applications in each group
+                [
+                    [<String>],
+                    [<String>, <String>],
+                    [<String>, <String>]
+                ]
+            ]
+        ]
+"""
 import oscar_functions
 import actions
 #This file contains the defaults for various config files that Oscar uses.

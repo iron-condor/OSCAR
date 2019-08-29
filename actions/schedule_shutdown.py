@@ -1,8 +1,9 @@
+"""Module that allows OSCAR to schedule a shutdown for a later time"""
 import oscar_functions
 import sys
 
-#Schedules a shutdown to be performed after a given time period.
 def schedule_shutdown():
+    """Schedules a shutdown to be performed after a given time period."""
     time = oscar_functions.schedule()
     if time != None:
         shell_command = None

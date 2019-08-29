@@ -1,7 +1,9 @@
+"""Module that OSCAR uses to schedule a command for a later time"""
 import oscar_functions
 
 #Schedules a command to be executed after a given time period.
 def schedule_command():
+    """Allows OSCAR to schedule a command to be executed later"""
     time = oscar_functions.schedule()
     if time != None:
         bash_command = None;

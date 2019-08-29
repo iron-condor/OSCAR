@@ -1,8 +1,10 @@
+"""Module that provides method to let the user configure their settings"""
 import oscar_functions, oscar_defaults
 import sys, json, re
 from pathlib import Path
-#Allows the user to view and adjust their settings
+
 def configure_settings():
+    """Allows the user to view and adjust their settings"""
     print(oscar_functions.get_response(32))
     setting_changed = 0
     print("Name: " + oscar_functions.settings[0])

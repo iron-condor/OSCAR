@@ -1,7 +1,9 @@
+"""Module that greets the user"""
 import oscar_defaults, oscar_functions
 from datetime import datetime
-#Greets the user. responses[0] for daytime greetings, responses[1] for nighttime greetings.
+
 def greet():
+    """Greets the user, based on what time of day it is."""
     global responses
     user = oscar_defaults.settings_array[0]
     hour = datetime.now().hour

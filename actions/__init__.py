@@ -1,3 +1,4 @@
+"""Loads all of the modules in the actions folder"""
 __all__ = []
 
 import pkgutil

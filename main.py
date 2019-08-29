@@ -1,3 +1,4 @@
+"""Module that starts the program, and loads/saves files"""
 # Dependencies: duckduckgo-python3, jsonpickle, xdg-utils (if using linux)
 import oscar_defaults
 import oscar_functions
@@ -9,8 +10,8 @@ import os
 import re
 import getpass
 
-#Walks the user through generating their settings
 def walkthrough():
+    """Walks the user through the available setting options, and assigns them based on user choice"""
     inputs_array = oscar_defaults.inputs_array
     settings_array = oscar_defaults.settings_array
     introduction = ""
@@ -56,8 +57,17 @@ def walkthrough():
     settings_array[2] = path_type
 
 
-#Loads the responses file if it exists. If it doesn't, one is automatically generated for the user.
 def load_responses():
+    """Loads the responses file if it exists. If it doesn't exist, the method generates one.
+
+    Files
+    -----
+    Creates a file at...
+
+        Windows: C:\\Program Files(x86)\\Oscar\\responses
+        macOS: ~/Library/Preferences/Oscar/responses
+        linux: ~/.config/oscar/responses
+    """
     responses_array = oscar_defaults.responses_array
     directory = None
     responses_file = None
@@ -82,8 +92,17 @@ def load_responses():
     else:
         oscar_defaults.responses_array = json.load(responses)
 
-#Loads the inputs file if it exists. If it doesn't, one is automatically generated for the user.
 def load_inputs():
+    """Loads the inputs file if it exists. If it doesn't exist, the method generates one
+
+    Files
+    -----
+    Creates a file at...
+
+        Windows: C:\\Program Files(x86)\\Oscar\\inputs
+        macOS: ~/Library/Preferences/Oscar/inputs
+        linux: ~/.config/oscar/inputs
+    """
     inputs_array = oscar_defaults.inputs_array
     directory = None
     inputs_file = None
@@ -109,8 +128,21 @@ def load_inputs():
         temp_loaded = inputs.read()
         oscar_defaults.inputs_array = jsonpickle.decode(temp_loaded)
 
-#Loads the settings file if it exists. If it doesn't, it prompts the user to select his/her settings, or allows the user to let oscar generate the defaults.
 def load_settings():
+    """Loads the settings file if it exists. Otherwise, it prompts the user for the walkthrough
+
+    If the settings file does not exist, the method will tell this to the user, and ask them if they would
+    like to have OSCAR generate the file with defaults, or if they would like to be prompted about each of
+    the settings, in order to choose them.
+
+    Files
+    -----
+    Creates a file at...
+
+        Windows: C:\\Program Files(x86)\\Oscar\\settings
+        macOS: ~/Library/Preferences/Oscar/settings
+        linux: ~/.config/oscar/settings
+    """
     settings_array = oscar_defaults.settings_array
     directory = None
     if sys.platform == "win32":
@@ -152,8 +184,17 @@ def load_settings():
     else:
         oscar_defaults.settings_array = json.load(settings)
 
-#Loads the groups file if it exists. If it doesn't, a blank one is automatically generated for the user.
 def load_groups():
+    """Loads the groups file if it exists. If it doesn't exist, a blank one is generated.
+
+    Files
+    -----
+    Creates a file at...
+
+        Windows: C:\\Program Files(x86)\\Oscar\\groups
+        macOS: ~/Library/Preferences/Oscar/groups
+        linux: ~/.config/oscar/groups
+    """
     groups_array = oscar_defaults.groups_array
     directory = None
     groups_file = None

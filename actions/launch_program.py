@@ -1,7 +1,9 @@
+"""Module that provides code for launching programs that OSCAR knows about"""
 import oscar_functions
 import re
 
 def launch_program():
+    """Code that allows OSCAR to launch a program he has been told about"""
     oscar_functions.command = oscar_functions.command.lower()
     confirmed_aliases = []
     alias_paths = []

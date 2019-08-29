@@ -1,8 +1,9 @@
+"""Module that allows OSCAR to look up things, summarize them, and display links for source webpages"""
 import oscar_functions
 import duckduckgo, re
 
-#Searches and interprets a given string. Can extract summaries from some sites and services. Uses duckduckgo
 def search():
+    """Searches and interprets a given string. Can extract summaries from some sites and services. Uses duckduckgo"""
     identifier_string = None
     for string in oscar_functions.inputs[1][0]:
         if re.search(string, oscar_functions.command):

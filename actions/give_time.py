@@ -1,7 +1,9 @@
+"""Module that gives the user the time and date"""
 import oscar_functions, oscar_defaults
 from datetime import datetime
-#Gives the user the time and date.
+
 def give_time():
+    """Gives the user the time and date."""
     day = datetime.now().day
     weekday = datetime.now().weekday
     month = datetime.now().month

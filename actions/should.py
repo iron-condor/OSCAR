@@ -1,11 +1,17 @@
+"""Module that allows OSCAR to randomly decide something for the user"""
 import oscar_functions
 from random import randint
 
-#Tells the user if someone should or should not perform an action.
-#It offers 2 variants
-#   - "Or" mode: Tells the user if they should perform one action, "or" another
-#   - "Yes/no" mode: Responds as to whether the user should or should not do one particular action.
 def should():
+    """Tells the user if someone should or should not perform an action.
+
+    Variations
+    ----------
+    "Or" mode:
+        Tells the user if they should perform one action, "or" another
+    "Yes/no" mode:
+        Responds as to whether the user should or should not do one particular action.
+    """
     #If we're in yes/no mode
     if " or " not in oscar_functions.command.lower():
         if randint(0, 1):
