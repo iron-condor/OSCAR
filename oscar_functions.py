@@ -43,7 +43,7 @@ def get_yes_no(confirm, type = None):
         Variable that contains the string to be parsed
     type (optional) : any
         If this variable is defined, it checks if the string means no
-        If the variable is le5ft undefined, it checks if the string means yes
+        If the variable is left undefined, it checks if the string means yes
 
     Returns
     -------
