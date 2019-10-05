@@ -63,7 +63,13 @@ class Launcher:
         return None
 
     def get_directory(self) -> "string":
-        """Returns the directory that OSCAR uses to store his files. OS-dependent."""
+        """Returns the directory that OSCAR uses to store his files. OS-dependent.
+
+        Returns
+        -------
+        String
+            The path to the directory that OSCAR saves his files in
+        """
         if sys.platform == "win32":
             return "C:\\Program Files(x86)\\Oscar"
         elif sys.platform == "darwin":
