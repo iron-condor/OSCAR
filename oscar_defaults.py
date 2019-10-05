@@ -572,7 +572,8 @@ inputs_array = [
             "\\bwho were\\b",
             "\\bjokes?\\b"
         ],
-        actions.give_time
+        actions.give_time,
+        {}
     ],
     #1: Search command
     [
@@ -605,7 +606,8 @@ inputs_array = [
         [
             "\\bjokes?\\b"
         ],
-        actions.search
+        actions.search,
+        {}
     ],
     #2: Should command
     [
@@ -615,7 +617,8 @@ inputs_array = [
         [
 
         ],
-        actions.should
+        actions.should,
+        {}
     ],
     #3: Launch program command
     [
@@ -628,7 +631,8 @@ inputs_array = [
         [
 
         ],
-        actions.launch_program
+        actions.launch_program,
+        {}
     ],
     #4: Thank you command
     [
@@ -643,7 +647,8 @@ inputs_array = [
         [
 
         ],
-        actions.thanks
+        actions.thanks,
+        {}
     ],
     #5: Schedule shutdown command
     [
@@ -656,7 +661,8 @@ inputs_array = [
         [
 
         ],
-        actions.schedule_shutdown
+        actions.schedule_shutdown,
+        {}
     ],
     #6: Schedule command command
     [
@@ -670,7 +676,8 @@ inputs_array = [
         [
 
         ],
-        actions.schedule_command
+        actions.schedule_command,
+        {}
     ],
     #7: Close command
     [
@@ -694,7 +701,8 @@ inputs_array = [
             "\\bno\\b",
             "\\bnevermind\\b"
         ],
-        oscar_functions.close_oscar
+        oscar_functions.close_oscar,
+        {}
     ],
     #8: A response that means no
     [
@@ -842,7 +850,8 @@ inputs_array = [
         [
 
         ],
-        actions.tell_joke
+        actions.tell_joke,
+        {}
     ],
     #16: A response that means the user wants a file manager.
     [
@@ -890,7 +899,8 @@ inputs_array = [
         [
 
         ],
-        actions.configure_settings
+        actions.configure_settings,
+        {}
     ],
     #19: A response that means the user wants to add a new program
     [
@@ -926,7 +936,8 @@ inputs_array = [
         [
 
         ],
-        actions.add_program
+        actions.add_program,
+        {}
     ],
     #20: Stopwatch command
     [
@@ -940,7 +951,8 @@ inputs_array = [
         [
 
         ],
-        actions.stopwatch
+        actions.stopwatch,
+        {}
     ]
 ]
 #The settings array is responsible for managing the user's various settings and preferences.

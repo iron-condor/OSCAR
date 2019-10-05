@@ -1,10 +1,10 @@
 """Module that allows OSCAR to schedule a shutdown for a later time"""
-import oscar_functions
 import sys
+import oscar_functions
 
-def schedule_shutdown():
+def schedule_shutdown(runtime):
     """Schedules a shutdown to be performed after a given time period."""
-    time = oscar_functions.schedule()
+    time = runtime.schedule()
     if time != None:
         shell_command = None
         if sys.platform == "win32":
@@ -14,4 +14,4 @@ def schedule_shutdown():
         else:
             shell_command = "sleep " + str(time) + " && poweroff"
         oscar_functions.subprocess_cmd(shell_command)
-        print(oscar_functions.get_response(12))
+        print(runtime.get_response(12))

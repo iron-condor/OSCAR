@@ -1,8 +1,7 @@
 """Module that allows OSCAR to randomly decide something for the user"""
-import oscar_functions
 from random import randint
 
-def should():
+def should(runtime):
     """Tells the user if someone should or should not perform an action.
 
     Variations
@@ -13,21 +12,21 @@ def should():
         Responds as to whether the user should or should not do one particular action.
     """
     #If we're in yes/no mode
-    if " or " not in oscar_functions.command.lower():
+    if " or " not in runtime.command.lower():
         if randint(0, 1):
-            print(oscar_functions.get_response(17))
+            print(runtime.get_response(17))
         else:
-            print(oscar_functions.get_response(18))
-    elif " or " in oscar_functions.command:
+            print(runtime.get_response(18))
+    elif " or " in runtime.command:
         #Cut out the "should i" part of the string
-        should_index = oscar_functions.command.find("should ")
+        should_index = runtime.command.find("should ")
         #The string "should " is 7 characters
         should_index += 7
-        end_of_next_word = oscar_functions.command.find(" ", should_index)
-        string = oscar_functions.command[end_of_next_word + 1:]
+        end_of_next_word = runtime.command.find(" ", should_index)
+        string = runtime.command[end_of_next_word + 1:]
         if string.endswith("?"):
             string = string[:-1]
         options = string.split(" or ")
-        randIndex = randint(0, len(options) - 1)
-        option = options[randIndex]
-        print(oscar_functions.get_response(14, "<option>", option))
+        rand_index = randint(0, len(options) - 1)
+        option = options[rand_index]
+        print(runtime.get_response(14, "<option>", option))
