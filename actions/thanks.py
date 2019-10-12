@@ -2,4 +2,4 @@
 
 def thanks(runtime):
     """Responds to the user thanking OSCAR"""
-    print(runtime.get_response(6))
+    print(runtime.responses["youre_welcome"].get_line())

@@ -14,4 +14,4 @@ def schedule_shutdown(runtime):
         else:
             shell_command = "sleep " + str(time) + " && poweroff"
         oscar_functions.subprocess_cmd(shell_command)
-        print(runtime.get_response(12))
+        print(runtime.responses["shutdown_scheduled"].get_line())

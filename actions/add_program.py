@@ -4,14 +4,17 @@ import os
 import sys
 from pathlib import Path
 import oscar_defaults
+import oscar_functions
+from config_structures import Program
 
 def add_program(runtime):
     """Method that prompts the user to add a new program to OSCAR's list"""
-    print(runtime.get_response(38))
-    #If the user wants a file manager
+    print(runtime.responses["prompt_select_file_for_new_program"].get_line())
     file_path = None
-    if runtime.settings[2]:
-        file_path = runtime.open_file_manager(Path.home())
+    program_aliases = []
+    #If the user wants a file manager
+    if runtime.settings["use_file_manager"].state:
+        file_path = oscar_functions.open_file_manager(Path.home())
         #If the user didn't choose a file
         if len(file_path) == 0:
             return
@@ -24,16 +27,14 @@ def add_program(runtime):
             if os.path.isfile(program):
                 break
             #If it isn't, prompt the user to reselect the file
-            print(runtime.get_response(39))
+            print(runtime.responses["disp_not_valid_file_path"].get_line())
     #If the user has already registered this program before
-    if file_path in runtime.groups[0][1]:
-        print(runtime.get_response(43))
+    if file_path in [p.executable_path for p in runtime.programs]:
+        print(runtime.responses["program_already_registered"].get_line())
         return
-    #Add the file path to the groups array
-    runtime.groups[0][1].append(file_path)
     #Prompt the user for the program's name
-    print(runtime.get_response(40))
-    print(runtime.get_response(41))
+    print(runtime.responses["prompt_for_aliases"].get_line())
+    print(runtime.responses["tutorial_enter_multiple_names"].get_line())
     while True:
         aliases_raw = input()
         #If the user entered more than one name
@@ -41,42 +42,42 @@ def add_program(runtime):
             aliases = aliases_raw.split(", ")
             already_exists = False
             existing_aliases = []
-            for alias_group in runtime.groups[0][0]:
+            for alias_group in [p.aliases for p in runtime.programs]:
                 for alias in alias_group:
                     if alias in aliases:
                         existing_aliases.append(alias)
                         already_exists = True
             if already_exists:
-                print(runtime.get_response(44))
+                print(runtime.responses["all_aliases_in_use"].get_line())
             else:
-                runtime.groups[0][0].append(aliases)
+                program_aliases = aliases
                 break
         else:
             already_exists = False
-            for alias_group in runtime.groups[0][0]:
+            for alias_group in [p.aliases for p in runtime.programs]:
                 for alias in alias_group:
                     if alias == aliases_raw:
                         already_exists = True
             if already_exists:
-                print(runtime.get_response(44))
+                print(runtime.responses["all_aliases_in_use"].get_line())
             else:
-                aliases_raw = [aliases_raw]
-                runtime.groups[0][0].append(aliases_raw)
+                program_aliases = [aliases_raw]
                 break
-    groups_array = oscar_defaults.groups_array
+    runtime.programs.append(Program(program_aliases, file_path))
+    programs_array = runtime.programs
     directory = None
-    groups_file = None
+    programs_file = None
     if sys.platform == "win32":
         directory = "C:\\Program Files(x86)\\Oscar"
-        groups_file = Path(directory + "\\groups")
+        programs_file = Path(directory + "\\programs")
     elif sys.platform == "darwin":
         directory = str(Path.home()) + "/Library/Preferences/Oscar"
-        groups_file = Path(directory + "/groups")
+        programs_file = Path(directory + "/programs")
     else:
         directory = str(Path.home()) + "/.config/oscar"
-        groups_file = Path(directory + "/groups")
+        programs_file = Path(directory + "/programs")
     if not os.path.exists(directory):
         os.makedirs(directory)
-    with open(groups_file, 'wb') as updated_groups:
-        pickle.dump(groups_array, updated_groups)
-    print(runtime.get_response(42))
+    with open(programs_file, 'wb') as updated_programs:
+        pickle.dump(programs_array, updated_programs)
+    print(runtime.responses["program_has_been_added"].get_line())

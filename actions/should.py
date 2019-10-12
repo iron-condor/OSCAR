@@ -14,9 +14,9 @@ def should(runtime):
     #If we're in yes/no mode
     if " or " not in runtime.command.lower():
         if randint(0, 1):
-            print(runtime.get_response(17))
+            print(runtime.responses["you_should"].get_line())
         else:
-            print(runtime.get_response(18))
+            print(runtime.responses["you_shouldnt"].get_line())
     elif " or " in runtime.command:
         #Cut out the "should i" part of the string
         should_index = runtime.command.find("should ")
@@ -29,4 +29,4 @@ def should(runtime):
         options = string.split(" or ")
         rand_index = randint(0, len(options) - 1)
         option = options[rand_index]
-        print(runtime.get_response(14, "<option>", option))
+        print(runtime.responses["should_option"].get_line("<option>", option))

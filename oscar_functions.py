@@ -26,7 +26,7 @@ def open_file_manager(location):
     root.filename = filedialog.askopenfilename(initialdir = location, title = "Select file")
     return root.filename
 
-def close_oscar():
+def close_oscar(self):
     """Closes the program.
 
     This function exists due to an error in jsonpickle, in which sys.exit() is mistakenly serialized as a dictionary
@@ -89,10 +89,10 @@ class Runtime:
 
     def __init__(self):
         #The responses, inputs, settings, and groups lists to be loaded or generated
-        self.responses = []
-        self.inputs = []
-        self.settings = []
-        self.groups = []
+        self.responses = {}
+        self.inputs = {}
+        self.settings = {}
+        self.groups = {}
 
         #Boolean that tells if it's the user's first time launching OSCAR
         self.first_time = True
@@ -125,68 +125,43 @@ class Runtime:
         """
         contained_yes = ""
         if parsing_type is None:
-            for i in range(0, len(self.inputs[9][0])):
+            for i in range(0, len(self.inputs["input_is_yes"].positive_matches)):
                 if contained_yes == "":
-                    if re.search(self.inputs[9][0][i], confirm):
-                        contained_yes = self.inputs[9][0][i]
-                    if contained_yes != "" and len(self.inputs[9][1]):
-                        for antiword in self.inputs[9][1]:
+                    if re.search(self.inputs["input_is_yes"].positive_matches[i], confirm):
+                        contained_yes = self.inputs["input_is_yes"].positive_matches[i]
+                    if contained_yes != "" and len(self.inputs["input_is_yes"].negative_matches):
+                        for antiword in self.inputs["input_is_yes"].negative_matches:
                             if re.search(antiword, confirm):
                                 contained_yes = ""
                 if contained_yes != "":
                     return True
             return False
 
-        for i in range(0, len(self.inputs[8][0])):
+        for i in range(0, len(self.inputs["input_is_no"].positive_matches)):
             if contained_yes == "":
-                if re.search(self.inputs[8][0][i], confirm):
-                    contained_yes = self.inputs[8][0][i]
-                if contained_yes != "" and len(self.inputs[8][1]):
-                    for antiword in self.inputs[8][1]:
+                if re.search(self.inputs["input_is_no"].positive_matches[i], confirm):
+                    contained_yes = self.inputs["input_is_no"].positive_matches[i]
+                if contained_yes != "" and len(self.inputs["input_is_no"].negative_matches):
+                    for antiword in self.inputs["input_is_no"].negative_matches:
                         if re.search(antiword, confirm):
                             contained_yes = ""
             else:
                 return True
 
-    def get_response(self, index, delimiter=None, replacement=None):
-        """Randomly fetches an appropriate response from the responses array.
-
-        Arguments
-        ---------
-        index : int
-            An integer reflecting which response set to select from
-        delimiter (optional) : string,
-            A string to be replaced with replacement. For example, "<user>"
-        replacement (optional) : string,
-            A string that replaces the delimiter. For example, "foo"
-
-        Returns
-        -------
-        String
-            Returns a random string from the selected response set, with any delimiters replaced
-        """
-        if delimiter is None or replacement is None:
-            if self.responses:
-                return self.responses[index][randint(0, len(self.responses[index]) - 1)]
-            else:
-                return oscar_defaults.responses_array[index][randint(0, len(oscar_defaults.responses_array[index]) - 1)]
-        else:
-            return self.get_response(index).replace(delimiter, replacement)
-
     def open_in_browser(self, url):
         """Opens URL in the user's browser. If it fails, prompt the user to open it theirself."""
         if sys.platform == 'win32':
-            print(self.get_response(23))
+            print(self.responses["opening_link"].get_line())
             os.startfile(url)
         elif sys.platform == 'darwin':
-            print(self.get_response(23))
+            print(self.responses["opening_link"].get_line())
             subprocess.Popen(['open', url])
         else:
             try:
-                print(self.get_response(23))
+                print(self.responses["opening_link"].get_line())
                 subprocess.Popen(['xdg-open', url])
             except OSError:
-                self.get_response(7, "<url>", url)
+                print(self.responses["cant_open_url"].get_line("<url>", url))
 
     def schedule(self):
         """Returns the time in seconds until a scheduled event. Interprets text from the user in standard time units
@@ -218,42 +193,43 @@ class Runtime:
                         continue
         if total_time != 0:
             time_string = convert_and_format_time(total_time)
-            confirm = input(self.get_response(8, "<time_string>", time_string)).lower()
+            confirm = input(self.responses["confirm_scheduled_time"].get_line("<time_string>", time_string).lower())
             while True:
                 if self.get_yes_no(confirm):
                     return total_time
                 elif self.get_yes_no(confirm, 1):
-                    print(self.get_response(9))
+                    print(self.responses["scheduled_task_cancelled"].get_line())
                     break
                 else:
-                    confirm = input(self.get_response(10)).lower()
+                    confirm = input(self.responses["confirm_yes_no"].get_line()).lower()
         else:
-            print(self.get_response(11))
+            print(self.responses["rephrase_scheduled_task"].get_line())
 
     def receive_command(self):
         """Receives the user's command and processes the input appropriately"""
         if self.first_time:
-            self.responses = oscar_defaults.responses_array
-            self.inputs = oscar_defaults.inputs_array
-            self.settings = oscar_defaults.settings_array
+            self.responses = oscar_defaults.responses_dict
+            self.inputs = oscar_defaults.inputs_dict
+            self.settings = oscar_defaults.settings_dict
             self.groups = oscar_defaults.groups_array
+            self.programs = oscar_defaults.programs_array
             actions.greet(self)
             self.first_time = False
         self.command = input("").lower()
         contained_keyword = ""
         found_keyword = False
-        for input_type in range(0, len(self.inputs)):
-            if contained_keyword == "" and self.inputs[input_type][2] != 0:
-                for keyword in self.inputs[input_type][0]:
+        for input_type in self.inputs:
+            if contained_keyword == "" and self.inputs[input_type].function:
+                for keyword in self.inputs[input_type].positive_matches:
                     if re.search(keyword, self.command):
                         contained_keyword = keyword
-                if contained_keyword != "" and len(self.inputs[input_type][1]):
-                    for antiword in self.inputs[input_type][1]:
+                if contained_keyword != "" and len(self.inputs[input_type].negative_matches):
+                    for antiword in self.inputs[input_type].negative_matches:
                         if re.search(antiword, self.command):
                             contained_keyword = ""
             if contained_keyword != "":
                 found_keyword = True
-                self.inputs[input_type][2](self, *self.inputs[input_type][3])
+                self.inputs[input_type].function(self, *self.inputs[input_type].parameters)
                 break
         if not found_keyword:
-            print(self.get_response(16))
+            print(self.responses["ambiguous_request"].get_line())

@@ -14,6 +14,6 @@ def schedule_command(runtime):
             oscar_functions.subprocess_cmd(bash_command)
 
         else:
-            bash_command = "sleep " + str(time) + " && " + input(runtime.get_response(22))
+            bash_command = "sleep " + str(time) + " && " + input(runtime.responses["prompt_command_to_schedule"].get_line())
             oscar_functions.subprocess_cmd(bash_command)
-        print(runtime.get_response(21))
+        print(runtime.responses["command_scheduled"].get_line())

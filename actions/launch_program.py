@@ -8,24 +8,24 @@ def launch_program(runtime):
     confirmed_aliases = []
     alias_paths = []
     #Searches the "command" for aliases, and adds their info to the above lists
-    for alias_group in runtime.groups[0][0]:
+    for alias_group in [p.aliases for p in runtime.programs]:
         for alias in alias_group:
             alias = "\\b" + alias + "\\b"
             if re.search(alias, runtime.command):
                 contains_alias = False
                 for path in alias_paths:
-                    if path == runtime.groups[0][1][runtime.groups[0][0].index(alias_group)]:
+                    if path == [p.executable_path for p in runtime.programs][[p.aliases for p in runtime.programs].index(alias_group)]:
                         contains_alias = True
                 if not contains_alias:
                     #Add the alias to the list
                     confirmed_aliases.append(alias)
                     #Add its file path to the list
-                    alias_paths.append(runtime.groups[0][1][runtime.groups[0][0].index(alias_group)])
+                    alias_paths.append([p.executable_path for p in runtime.programs][[p.aliases for p in runtime.programs].index(alias_group)])
     for path in alias_paths:
         oscar_functions.subprocess_cmd(path)
     if (len(confirmed_aliases) > 1):
-        print(runtime.get_response(28))
+        print(runtime.responses["launching_programs"].get_line())
     elif (len(confirmed_aliases) > 0):
-        print(runtime.get_response(29))
+        print(runtime.responses["launching_program"].get_line())
     else:
-        print(runtime.get_response(30))
+        print(runtime.responses["couldnt_find_program_requested"].get_line())

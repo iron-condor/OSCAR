@@ -4,7 +4,7 @@ import duckduckgo, re
 def search(runtime):
     """Searches and interprets a given string. Can extract summaries from some sites and services. Uses duckduckgo"""
     identifier_string = None
-    for string in runtime.inputs[1][0]:
+    for string in runtime.inputs["search_command"].positive_matches:
         if re.search(string, runtime.command):
             identifier_string = string
             break
@@ -18,29 +18,29 @@ def search(runtime):
         if answer != "":
             print(answer + "\n")
             if duck_query.type != "nothing":
-                confirm = input(runtime.get_response(4)).lower()
+                confirm = input(runtime.responses["offer_source"].get_line()).lower()
                 if runtime.get_yes_no(confirm):
                     runtime.open_in_browser(duck_query.related[0].url)
                 else:
-                    print(runtime.get_response(19))
+                    print(runtime.responses["wont_open_summary_good"].get_line())
             elif answer.startswith("http"):
                 if answer.startswith("https://www.youtu.be") or answer.startswith("https://www.youtube.com"):
-                    confirm = input(runtime.get_response(31))
+                    confirm = input(runtime.responses["found_video"].get_line())
                 else:
-                    confirm = input(runtime.get_response(3)).lower()
+                    confirm = input(runtime.responses["search_query_no_summary"].get_line()).lower()
                 if runtime.get_yes_no(confirm):
                     runtime.open_in_browser(answer)
                 else:
-                    print(runtime.get_response(20))
+                    print(runtime.responses["wont_open_no_summary"].get_line())
 
         else:
-            confirm = input(runtime.get_response(3)).lower()
+            confirm = input(runtime.responses["search_query_no_summary"].get_line()).lower()
             if runtime.get_yes_no(confirm):
                 for c in query:
                     if c == ' ':
                         c = '+'
                 runtime.open_in_browser("https://www.duckduckgo.com/?q=" + query)
             else:
-                print(runtime.get_response(20))
+                print(runtime.responses["wont_open_no_summary"].get_line())
     else:
-        print(runtime.get_response(2))
+        print(runtime.responses["search_query_blank"].get_line())

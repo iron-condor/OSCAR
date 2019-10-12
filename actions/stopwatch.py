@@ -16,9 +16,9 @@ def stop_stopwatch():
 
 def stopwatch(runtime):
     """Manages the starting and stopping of the stopwatch"""
-    print(runtime.get_response(45))
+    print(runtime.responses["stopwatch_started"].get_line())
     start_stopwatch()
     input()
     final_time = stop_stopwatch()
     formatted_time = oscar_functions.convert_and_format_time(final_time)
-    print(runtime.get_response(46, "<time_string>", formatted_time))
+    print(runtime.responses["disp_time_passed"].get_line("<time_string>", formatted_time))
