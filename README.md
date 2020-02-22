@@ -18,8 +18,6 @@ OSCAR generates a few files when you first start him. He'll notify you as to whe
 #### Linux
 `~/.config/oscar/`
 
-Each file is formatted using JSON, and has its own purpose
-
 With these files, you can customize OSCAR to be able to use and understand any type of vernacular. If you plan on adding new functions to OSCAR, you'll need to update these files accordingly. Documentation on all of the files can be found on the wiki, or in the [oscar_defaults.py file](https://www.notabug.org/ironcondor/OSCAR/src/master/oscar_defaults.py)
 
 ### **Features**
@@ -27,6 +25,7 @@ With these files, you can customize OSCAR to be able to use and understand any t
 OSCAR is still in its youth, so expect more features in the near future.
 
 At the moment, OSCAR can
+* Send texts to your contacts
 * Tell you the time
 * Look up and summarize things for you
 * Schedule a shutdown
@@ -34,6 +33,7 @@ At the moment, OSCAR can
 * Help you make decisions (*Should I stay in for the night, or go out and eat?*)
 * Tell you jokes (using [https://github.com/pyjokes/pyjokes](pyjokes!))
 * Launch programs for you
+* Launch groups of programs for you
 * Time things for you
 
 ### **Dependencies**
@@ -46,6 +46,8 @@ xdg-utils (if using linux)
 tkinter
 
 jsonpickle
+
+vobject
 
 ### **Getting started**
 
