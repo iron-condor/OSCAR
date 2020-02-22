@@ -2,7 +2,13 @@
 import duckduckgo, re
 
 def search(runtime):
-    """Searches and interprets a given string. Can extract summaries from some sites and services. Uses duckduckgo"""
+    """Searches and interprets a given string. Can extract summaries from some sites and services. Uses duckduckgo
+
+    Arguments
+    ---------
+    runtime : Runtime
+        The current Oscar runtime (defined in oscar_functions.py)
+    """
     identifier_string = None
     for string in runtime.inputs["search_command"].positive_matches:
         if re.search(string, runtime.command):

@@ -3,7 +3,13 @@ import oscar_functions, oscar_defaults
 from datetime import datetime
 
 def give_time(runtime):
-    """Gives the user the time and date."""
+    """Gives the user the time and date.
+
+    Arguments
+    ---------
+    runtime : Runtime
+        The current Oscar runtime (defined in oscar_functions.py)
+    """
     time = None
     #If 12-hour clock
     if (runtime.settings["use_12_hour_clock"].state):

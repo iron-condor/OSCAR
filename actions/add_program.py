@@ -8,7 +8,13 @@ import oscar_functions
 from config_structures import Program
 
 def add_program(runtime):
-    """Method that prompts the user to add a new program to OSCAR's list"""
+    """Method that prompts the user to add a new program to OSCAR's list
+
+    Arguments
+    ---------
+    runtime : Runtime
+        The current Oscar runtime (defined in oscar_functions.py)
+    """
     print(runtime.responses["prompt_select_file_for_new_program"].get_line())
     file_path = None
     program_aliases = []

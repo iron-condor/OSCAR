@@ -9,13 +9,25 @@ def start_stopwatch():
     global start_time
     start_time = time.time()
 
-def stop_stopwatch():
-    """Stops the stopwatch"""
+def stop_stopwatch() -> float:
+    """Stops the stopwatch
+
+    Returns
+    -------
+    float
+        The amount of time that has passed between when the stopwatch was started and when it was stopped
+    """
     stop_time = time.time()
     return stop_time - start_time
 
 def stopwatch(runtime):
-    """Manages the starting and stopping of the stopwatch"""
+    """Manages the starting and stopping of the stopwatch
+
+    Arguments
+    ---------
+    runtime : Runtime
+        The current Oscar runtime (defined in oscar_functions.py)
+    """
     print(runtime.responses["stopwatch_started"].get_line())
     start_stopwatch()
     input()

@@ -21,11 +21,15 @@ class Launcher:
         self.settings_dict = oscar_defaults.settings_dict
         self.programs_array = oscar_defaults.programs_array
         self.groups_array = oscar_defaults.groups_array
+        self.contacts_array = []
+        self.api_keys = oscar_defaults.api_keys
         self.load_responses()
         self.load_inputs()
         self.load_programs()
         self.load_groups()
         self.load_settings()
+        self.load_contacts()
+        self.load_api_keys()
         self.runtime = oscar_functions.Runtime()
 
     def start(self):
@@ -38,7 +42,7 @@ class Launcher:
 
         Arguments
         ---------
-        filename : string
+        filename : String
             The filename to be loaded from or saved to
         to_save : pickleable object or primitive
             The content to be saved, if the config doesn't exist
@@ -124,6 +128,21 @@ class Launcher:
         self.settings_dict["use_file_manager"].state = use_file_manager
 
 
+    def load_api_keys(self):
+        """Loads the api_keys file if it exists. If it doesn't exist, the method generates one.
+
+        Files
+        -----
+        Creates a file at...
+
+            Windows: C:\\Program Files(x86)\\Oscar\\api_keys
+            macOS: ~/Library/Preferences/Oscar/api_keys
+            linux: ~/.config/oscar/api_keys
+        """
+        api_keys = self.save_or_load_config("api_keys", self.api_keys)
+        if api_keys:
+            oscar_defaults.api_keys = api_keys
+
     def load_responses(self):
         """Loads the responses file if it exists. If it doesn't exist, the method generates one.
 
@@ -137,7 +156,7 @@ class Launcher:
         """
         responses = self.save_or_load_config("responses", self.responses_dict)
         if responses:
-            self.responses_dict_dict = responses
+            oscar_defaults.responses_dict = responses
 
     def load_inputs(self):
         """Loads the inputs file if it exists. If it doesn't exist, the method generates one
@@ -224,3 +243,8 @@ class Launcher:
         programs = self.save_or_load_config("programs", self.programs_array)
         if programs:
             oscar_defaults.programs_array = programs
+
+    def load_contacts(self):
+        contacts = self.save_or_load_config("contacts", self.contacts_array)
+        if contacts:
+            oscar_defaults.contacts_array = contacts

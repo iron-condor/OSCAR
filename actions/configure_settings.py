@@ -1,10 +1,16 @@
-"""Module that provides method to let the user configure their settings"""
+"""Module that provides a method to let the user configure their settings"""
 import oscar_functions, oscar_defaults
 import sys, json, re, pickle
 from pathlib import Path
 
 def configure_settings(runtime):
-    """Allows the user to view and adjust their settings"""
+    """Allows the user to view and adjust their settings
+
+    Arguments
+    ---------
+    runtime : Runtime
+        The current Oscar runtime (defined in oscar_functions.py)
+    """
     print(runtime.responses["prompt_configure_settings"].get_line())
     setting_changed = False
     print("Name: " + runtime.settings["name"].state)

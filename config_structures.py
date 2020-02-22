@@ -8,7 +8,7 @@ class Response:
 
         Arguments
         ---------
-        name : string
+        name : String
             A unique name used to identify the response
         lines : list[string]
             A list of response lines, from which OSCAR can choose
@@ -21,9 +21,9 @@ class Response:
 
         Arguments
         ---------
-        delimiter (optional) : string
+        delimiter (optional) : String
             A string to be replaced with replacement. For example, "<user>"
-        replacement (optional) : string
+        replacement (optional) : String
             A string that replaces the delimiter. For example, "foo"
 
         Returns
@@ -43,7 +43,7 @@ class Input:
 
         Arguments
         ---------
-        name : string
+        name : String
             A unique name used to identify the Input
         positive_matches : list[string]
             A list of RegEx strings that, if found in the user's input, mark it as a positive match for this
@@ -69,7 +69,7 @@ class Setting:
 
         Arguments
         ---------
-        name : string,
+        name : String,
             A unique name used to identify the Setting
         state : *
             The state of the setting.
@@ -90,7 +90,7 @@ class Program:
         aliases : list[string]
             A list of strings that represent the program.
             Ex: ["firefox", "ff", "browser"]
-        executable_path : string
+        executable_path : String
             A string that points to the absolute filepath of the program's executable
             Ex: "/usr/bin/firefox"
         """

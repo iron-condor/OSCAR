@@ -3,7 +3,13 @@ from datetime import datetime
 import oscar_defaults
 
 def greet(runtime):
-    """Greets the user, based on what time of day it is."""
+    """Greets the user, based on what time of day it is.
+
+    Arguments
+    ---------
+    runtime : Runtime
+        The current Oscar runtime (defined in oscar_functions.py)
+    """
     user = oscar_defaults.settings_dict["name"].state
     hour = datetime.now().hour
     greeting = ""

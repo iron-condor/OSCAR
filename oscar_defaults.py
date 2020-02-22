@@ -1,3 +1,4 @@
+import oscar_functions
 """Contains a list of inputs and outputs that OSCAR recognizes, as well as application groups and settings.
 
     Responses
@@ -19,7 +20,7 @@
     Settings
     --------
     A list of settings that the user can configure to customize OSCAR. As of the moment, it contains the following settings
-    name : string
+    name : String
         The name that the user wishes to be addressed by
     clock type : int
         The clock type that the user wishes to use. 0 = 24 hour, 1 = 12 hour
@@ -490,6 +491,123 @@ disp_time_passed = Response("disp_time_passed",
     "Finished. <time_string>"
 ])
 
+prompt_contacts_file_location = Response("prompt_contacts_file_location",
+[
+    "Please select your Contacts VCF file.",
+    "Okay, select your Contacts file -- and make sure it's in the VCF format.",
+    "Give me the location of your contacts VCF file, please.",
+    "Please give me the path to your contacts VCF file.",
+    "Alright, I just need the path to your contacts VCF file."
+])
+
+contacts_imported = Response("contacts_imported",
+[
+    "Done! I've successfully imported your contacts.",
+    "Aaaand, finished. I have all your contacts loaded.",
+    "Contacts loading... finished!",
+    "Consider your contacts imported.",
+    "I've got a barrel o'contacts now, they've been imported successfully."
+])
+
+failed_to_import_contacts = Response("failed_to_import_contacts",
+[
+    "Something went wrong, and I couldn't import your contacts.",
+    "I've tried everything, but I can't seem to import your contacts",
+    "Your contacts are import-proof or something, because I can't import them",
+    "I'm working hard here, captain, but I can't import your contacts",
+    "Sometimes things go wrong. This is one of those times -- I can't import your contacts."
+])
+
+verify_person_to_text = Response("verify_person_to_text",
+[
+    "Let's see... you mean <person>, right?\n",
+    "You're talking about <person>, yeah?\n",
+    "I think you mean <person>, right?\n",
+    "I'm supposed to contact <person>, mhm?\n",
+    "Just checking -- you want me to contact <person>?\n"
+])
+
+cant_find_in_contacts = Response("cant_find_in_contacts",
+[
+    "I can't find them in your contacts.",
+    "I'm looking, but I can't seem to find anyone named that",
+    "Are you sure you've told me about this person? I don't see them",
+    "I don't seem to have anyone named that here.",
+    "I can't seem to find anyone with that name in your contacts"
+])
+
+prompt_what_texting = Response("prompt_what_texting",
+[
+    "Cool, got it. What do I text them?\n",
+    "What do you want me to text them?\n",
+    "Okay, I've got a really tiny keyboard here. What should I text them?\n",
+    "What's the text?\n",
+    "What do you want me to say?\n"
+])
+
+text_sent_successfully = Response("text_sent_successfully",
+[
+    "Neat! The text went through",
+    "Done! They should be receiving it shortly.",
+    "I've dispatched tiny digital carrier pidgeons with your message.",
+    "Text sent.",
+    "I just sent your text, they should get it soon."
+])
+
+text_failed = Response("text_failed",
+[
+    "Something went wrong, I can't get the text through.",
+    "Weird, I can't seem to get the text to go through.",
+    "I tried sending the text, but it failed, sorry.",
+    "I'm unable to send the text message for some reason or another",
+    "My digital carrier pidgeons are on vacation right now, and I can't send the text for some reason at the moment"
+])
+
+no_phone_number_found = Response("no_phone_number_found",
+[
+    "This person doesn't have a phone number in your contacts.",
+    "I found this person, but I can't find their phone number.",
+    "Weirdly enough, I can find this person but not their phone number",
+    "Are you sure you have a phone number saved for this person? I can't find it",
+    "There's no phone number registered for this person"
+])
+
+prompt_want_to_add_api_key = Response("prompt_want_to_add_api_key",
+[
+    "I'm missing an API key that I need for that action. Do you want to add a <api> key?\n",
+    "I'd like to do that, but I need an API key first. Do you want to add an <api> key right now?\n",
+    "I need an API key for <api> to do that. Do you want to add one right now?\n",
+    "I can only do so much on my own, I need an API key for <api> to do that. Do you want to add it right now?\n",
+    "I dont have the API key that I need to do that. Do you want to add a <api> key right now, then we can resume?\n"
+])
+
+prompt_api_key = Response("prompt_api_key",
+[
+    "Cool! What's the API key? I can't wait to learn how to use <api>!\n",
+    "I'm excited! What's the key?\n",
+    "I love getting new features! What's the <api> key?\n",
+    "Pretend I'm a lock. Now, give me your <api> key.\n",
+    "What's your <api> key?\n"
+])
+
+api_key_has_been_added = Response("api_key_has_been_added",
+[
+    "I've added your API key. I can feel the new features unlocking! Let's resume, shall we?",
+    "API key added, features unlocked. Let's continue, shall we?",
+    "I just added that API key. Now, let's get down to business.",
+    "Thanks! I'll keep that key around, I can do a lot more for you now. Now, why don't we get back to it?",
+    "Sweet! API key added, I can now support new features. Let's resume, shall we?"
+])
+
+cant_text_without_api_key = Response("cant_text_without_api_key",
+[
+    "My apologies, but I can't text people without an API key.",
+    "Darn, I really hate having to tell you no, but I can't send any texts without an API key.",
+    "My developer took away my phone, so unless I get an API key, I can't text anyone on your behalf.",
+    "As much as I want to text that person for you, I'm not able to send any texts without an API key.",
+    "I really do need that API key to text people, sorry."
+])
+
 responses_dict = {
     "daytime_greetings" : daytime_greetings,
     "nighttime_greetings" : nighttime_greetings,
@@ -537,7 +655,20 @@ responses_dict = {
     "program_already_registered" : program_already_registered,
     "all_aliases_in_use" : all_aliases_in_use,
     "stopwatch_started" : stopwatch_started,
-    "disp_time_passed" : disp_time_passed
+    "disp_time_passed" : disp_time_passed,
+    "contacts_imported" : contacts_imported,
+    "failed_to_import_contacts" : failed_to_import_contacts,
+    "verify_person_to_text" : verify_person_to_text,
+    "cant_find_in_contacts" : cant_find_in_contacts,
+    "prompt_what_texting" : prompt_what_texting,
+    "text_sent_successfully" : text_sent_successfully,
+    "text_failed" : text_failed,
+    "no_phone_number_found" : no_phone_number_found,
+    "prompt_want_to_add_api_key" : prompt_want_to_add_api_key,
+    "prompt_api_key" : prompt_api_key,
+    "api_key_has_been_added" : api_key_has_been_added,
+    "cant_text_without_api_key" : cant_text_without_api_key,
+    "prompt_contacts_file_location" : prompt_contacts_file_location
 }
 
 #Inputs
@@ -675,7 +806,7 @@ close_command = Input(
         "\\blater\\b",
         "\\bsee you later\\b",
         "\\bcya\\b",
-        "\\bsee you\\b",
+        "\\bsee you around\\b",
         ":q"
     ],
     negative_matches = [
@@ -907,6 +1038,44 @@ stopwatch_command =  Input(
     function = actions.stopwatch
 )
 
+import_contacts = Input(
+    "import_contacts",
+    positive_matches = [
+        "\\bimport contacts\\b",
+        "\\bimport my contacts\\b",
+        "\\bimport some contacts\\b",
+        "\\bload contacts\\b",
+        "\\bload my contacts\\b",
+        "\\bload some contacts\\b"
+    ],
+    function = actions.import_contacts
+)
+
+text_person = Input(
+    "text_person",
+    positive_matches = [
+        "\\bsend a text to\\b",
+        "\\btext\\b",
+        "\\bcan you text\\b",
+        "\\bcould you text\\b",
+        "\\bcan you send a text to\\b",
+        "\\bcould you send a text to\\b",
+        "\\bcould you please send a text to\\b",
+        "\\bcan you please send a text to\\b"
+    ],
+    function = actions.text_person
+)
+
+add_contact = Input(
+    "add_contact",
+    positive_matches = [
+        "\\badd contact\\b",
+        "\\badd a new contact\\b",
+        "\\badd new contact\\b"
+    ],
+    function = actions.add_contact
+)
+
 inputs_dict = {
     "time_date_command" : time_date_command,
     "search_command" : search_command,
@@ -928,7 +1097,10 @@ inputs_dict = {
     "type_out_paths_input" : type_out_paths_input,
     "reconfigure_settings_input" : reconfigure_settings_input,
     "add_new_program_input" : add_new_program_input,
-    "stopwatch_command" : stopwatch_command
+    "stopwatch_command" : stopwatch_command,
+    "import_contacts" : import_contacts,
+    "text_person" : text_person,
+    "add_contact" : add_contact
 }
 
 #The settings dictionary is responsible for managing the user's various settings and preferences.
@@ -948,3 +1120,8 @@ programs_array = []
 #Houses a list of program groups that the user has told Oscar to group together
 #"Groups" are sets of applications that OSCAR associates with particular phrases or words
 groups_array = []
+
+contacts_array = []
+
+#Dictionary that houses the API keys that the user has told Oscar about
+api_keys = {}

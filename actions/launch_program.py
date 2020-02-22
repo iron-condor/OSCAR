@@ -3,7 +3,13 @@ import re
 import oscar_functions
 
 def launch_program(runtime):
-    """Code that allows OSCAR to launch a program he has been told about"""
+    """Code that allows OSCAR to launch a program he has been told about
+
+    Arguments
+    ---------
+    runtime : Runtime
+        The current Oscar runtime (defined in oscar_functions.py)
+    """
     runtime.command = runtime.command.lower()
     confirmed_aliases = []
     alias_paths = []

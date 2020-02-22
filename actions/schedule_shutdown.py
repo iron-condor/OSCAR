@@ -3,7 +3,13 @@ import sys
 import oscar_functions
 
 def schedule_shutdown(runtime):
-    """Schedules a shutdown to be performed after a given time period."""
+    """Schedules a shutdown to be performed after a given time period.
+
+    Arguments
+    ---------
+    runtime : Runtime
+        The current Oscar runtime (defined in oscar_functions.py)
+    """
     time = runtime.schedule()
     if time != None:
         shell_command = None

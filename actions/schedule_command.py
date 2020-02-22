@@ -3,7 +3,13 @@ import oscar_functions
 
 #Schedules a command to be executed after a given time period.
 def schedule_command(runtime):
-    """Allows OSCAR to schedule a command to be executed later"""
+    """Allows OSCAR to schedule a command to be executed later
+
+    Arguments
+    ---------
+    runtime : Runtime
+        The current Oscar runtime (defined in oscar_functions.py)
+    """
     time = runtime.schedule()
     if time is not None:
         bash_command = None

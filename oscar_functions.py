@@ -7,9 +7,25 @@ import re
 from tkinter import filedialog
 from random import randint
 from actions import *
+from classes import *
 from tkinter import *
 import oscar_defaults
 import actions
+
+def get_directory() -> "string":
+    """Returns the directory that OSCAR uses to store his files. OS-dependent.
+
+    Returns
+    -------
+    String
+        The path to the directory that OSCAR saves his files in
+    """
+    if sys.platform == "win32":
+        return "C:\\Program Files(x86)\\Oscar"
+    elif sys.platform == "darwin":
+        return str(Path.home()) + "/Library/Preferences/Oscar"
+    else:
+        return str(Path.home()) + "/.config/oscar"
 
 def subprocess_cmd(bash_command):
     """Runs commands as a detached subprocess.
@@ -19,8 +35,14 @@ def subprocess_cmd(bash_command):
     """
     subprocess.Popen(bash_command,stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True, preexec_fn=os.setpgrp)
 
-def open_file_manager(location):
-    """Opens a file manager window for the user to select a file from"""
+def open_file_manager(location) -> str:
+    """Opens a file manager window for the user to select a file from
+
+    Returns
+    -------
+    String
+        The path to the file chosen by the user
+    """
     root = Tk()
     root.withdraw()
     root.filename = filedialog.askopenfilename(initialdir = location, title = "Select file")
@@ -33,7 +55,7 @@ def close_oscar(self):
     """
     sys.exit()
 
-def convert_and_format_time(total_time):
+def convert_and_format_time(total_time) -> str:
     """Takes time in seconds as an argument, and converts it to the lowest expressable value in days/hours/minutes/seconds
 
     Arguments
@@ -93,20 +115,22 @@ class Runtime:
         self.inputs = {}
         self.settings = {}
         self.groups = {}
+        #Dictionary of API keys to be loaded or generated
+        self.api_keys = {}
 
         #Boolean that tells if it's the user's first time launching OSCAR
         self.first_time = True
         #String that stores the command that the user last entered
         self.command = ""
 
-    def get_yes_no(self, confirm, parsing_type=None):
+    def get_yes_no(self, confirm, parsing_type=None) -> bool:
         """Decides if a particular string is a positive or negative statement.
 
         In other words, it can read a string as yes/no.
 
         Arguments
         ---------
-        confirm : string
+        confirm : String
             Variable that contains the string to be parsed
         parsing_type (optional) : any
             If this variable is defined, it checks if the string means no
@@ -163,7 +187,7 @@ class Runtime:
             except OSError:
                 print(self.responses["cant_open_url"].get_line("<url>", url))
 
-    def schedule(self):
+    def schedule(self) -> float:
         """Returns the time in seconds until a scheduled event. Interprets text from the user in standard time units
 
         Returns
@@ -213,6 +237,8 @@ class Runtime:
             self.settings = oscar_defaults.settings_dict
             self.groups = oscar_defaults.groups_array
             self.programs = oscar_defaults.programs_array
+            self.contacts = oscar_defaults.contacts_array
+            self.api_keys = oscar_defaults.api_keys
             actions.greet(self)
             self.first_time = False
         self.command = input("").lower()

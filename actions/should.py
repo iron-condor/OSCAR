@@ -4,6 +4,11 @@ from random import randint
 def should(runtime):
     """Tells the user if someone should or should not perform an action.
 
+    Arguments
+    ---------
+    runtime : Runtime
+        The current Oscar runtime (defined in oscar_functions.py)
+
     Variations
     ----------
     "Or" mode:
