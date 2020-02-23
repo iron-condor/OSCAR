@@ -26,6 +26,7 @@ OSCAR is still in its youth, so expect more features in the near future.
 
 At the moment, OSCAR can
 * Send texts to your contacts (using [Pushbullet](https://www.pushbullet.com/))
+* Update your computer
 * Tell you the time
 * Look up and summarize things for you
 * Schedule a shutdown
@@ -49,6 +50,7 @@ jsonpickle
 
 vobject
 
+getpass
 ### **Getting started**
 
 Starting with OSCAR is easy - just open the program in a terminal and start talking to him.

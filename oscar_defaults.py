@@ -608,6 +608,33 @@ cant_text_without_api_key = Response("cant_text_without_api_key",
     "I really do need that API key to text people, sorry."
 ])
 
+prompt_for_password = Response("prompt_for_password",
+[
+    "What's your password? I'll forget it right afterwards, don't worry.\n",
+    "I need your password, but I promise that I won't store it.\n",
+    "What is your root password? I won't keep it, don't worry.\n",
+    "I need to know your root password, but I won't remember it or keep it in a file. Scout's honor.\n",
+    "What is your root password? I just need it for this task, but I won't keep any records or memory of it.\n"
+])
+
+computer_is_updating = Response("computer_is_updating",
+[
+    "I'm attempting to update your computer now.",
+    "I'm working on updating your computer now.",
+    "Okay, I'm updating your computer as we speak.",
+    "Your computer is being updated as we speak.",
+    "I'm updating your computer in the background."
+])
+
+updating_not_supported_on_this_platform = Response("updating_not_supported_on_this_platform",
+[
+    "I'm afraid I can only update your computer if you're on particular linux systems. Complain to my developer!",
+    "Sorry, I only know how to update certain linux systems. Complain to my developer, and he might add support for your platform!",
+    "No can do. I'm only familiar with updating a few kinds of linux systems. You can submit a ticket on my github, though!",
+    "Sorry pal, I don't know how to update your type of system. You can talk to my developer about it, though!",
+    "I can't update this type of system. If you want support, though, you could talk to my developer about it."
+])
+
 responses_dict = {
     "daytime_greetings" : daytime_greetings,
     "nighttime_greetings" : nighttime_greetings,
@@ -668,7 +695,10 @@ responses_dict = {
     "prompt_api_key" : prompt_api_key,
     "api_key_has_been_added" : api_key_has_been_added,
     "cant_text_without_api_key" : cant_text_without_api_key,
-    "prompt_contacts_file_location" : prompt_contacts_file_location
+    "prompt_contacts_file_location" : prompt_contacts_file_location,
+    "prompt_for_password" : prompt_for_password,
+    "computer_is_updating" : computer_is_updating,
+    "updating_not_supported_on_this_platform" : updating_not_supported_on_this_platform
 }
 
 #Inputs
@@ -1076,6 +1106,23 @@ add_contact = Input(
     function = actions.add_contact
 )
 
+update_computer_input = Input(
+    "update_computer",
+    positive_matches = [
+        "\\b(?=.*\\bupdate\\b)(?=.*\\bcomputer\\b)\\b",
+        "\\b(?=.*\\bupdate\\b)(?=.*\\bpc\\b)\\b",
+        "\\b(?=.*\\bupdate\\b)(?=.*\\bsystem\\b)\\b",
+        "\\b(?=.*\\bupgrade\\b)(?=.*\\bsystem\\b)\\b",
+        "\\b(?=.*\\bupgrade\\b)(?=.*\\bcomputer\\b)\\b",
+        "\\b(?=.*\\bupgrade\\b)(?=.*\\bpc\\b)\\b",
+    ],
+    negative_matches = [
+        "\\bsettings\\b",
+        "\\bcontacts\\b"
+    ],
+    function = actions.update_computer
+)
+
 inputs_dict = {
     "time_date_command" : time_date_command,
     "search_command" : search_command,
@@ -1100,7 +1147,8 @@ inputs_dict = {
     "stopwatch_command" : stopwatch_command,
     "import_contacts" : import_contacts,
     "text_person" : text_person,
-    "add_contact" : add_contact
+    "add_contact" : add_contact,
+    "update_computer_input" : update_computer_input
 }
 
 #The settings dictionary is responsible for managing the user's various settings and preferences.
